@@ -98,11 +98,11 @@ def scrape_reddit():
         pattern_city = re.compile(rf"\b(?=\w){city[0]}|{city[0].lower()}\b(?!\w)")
 
         for res in results:
-            res["cities_mentioned"] = []
+            res["cities_mentioned"] = None
 
             if bool(pattern_city.search(res["query_result"])):
                 print(f"City found! {city[0]}")
-                res["cities_mentioned"] = res["cities_mentioned"].append(f"{city[0]}, {city[1]}")
+                res["cities_mentioned"] = res["cities_mentioned"] + f"{city[0]}, {city[1]}\n"
 
     for country in countries[1:]:
 
@@ -112,11 +112,11 @@ def scrape_reddit():
         pattern_country = re.compile(rf"\b(?=\w){country[0]}|{country[0].lower()}\b(?!\w)")
 
         for res in results:
-            res["countries_mentioned"] = []
+            res["countries_mentioned"] = None
 
             if bool(pattern_country.search(res["query_result"])):
                 print(f"Country found! {country[0]}")
-                res["countries_mentioned"] = res["countries_mentioned"].append(country[0])
+                res["countries_mentioned"] = res["countries_mentioned"] + f"{country[0]}\n"
 
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(5))

@@ -7,3 +7,15 @@ text = "In the Netherlands the price for our tap water is regulated at approxima
 pattern = re.compile(rf"\b(?=\w)Netherlands|netherlands\b(?!\w)")
 
 print(bool(pattern.search(text)))
+
+
+ditc_list = [{"hell": "rell"}, {"hell": "well"}]
+
+for dict in ditc_list:
+    dict["well"] = ""
+
+    if dict["hell"]:
+        dict["well"] = dict["well"] + " hell "
+
+
+print(ditc_list)
