@@ -141,7 +141,7 @@ def scrape_reddit():
                         continue
 
                     error = client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.tap_water_reddit"),
-                                               [(results["query_result"], results["levenshtein_distance"].
+                                               [(results["query_result"], int(results["levenshtein_distance"]).
                                                  results["cities_mentioned"], results["countries_mentioned"],
                                                  ", ".join(results["key_phrases"]), results["main_key_phrase"])])
 
