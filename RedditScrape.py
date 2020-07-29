@@ -79,7 +79,9 @@ def scrape_reddit():
             if bool(pattern.search(comment.body)):
                 results.append(
                     {"query_result": comment.body,
-                     "levenshtein_distance": nltk.edit_distance("tap water", comment.body)})
+                     "levenshtein_distance": nltk.edit_distance("tap water", comment.body),
+                     "cities_mentioned": "",
+                     "countries_mentioned": ""})
 
     print(f"Found {len(results)} queries containing the phrase.")
 
@@ -98,7 +100,6 @@ def scrape_reddit():
         pattern_city = re.compile(rf"\b(?=\w){city[0]}|{city[0].lower()}\b(?!\w)")
 
         for res in results:
-            res["cities_mentioned"] = ""
 
             if bool(pattern_city.search(res["query_result"])):
                 print(f"City found! {city[0]}")
@@ -112,7 +113,6 @@ def scrape_reddit():
         pattern_country = re.compile(rf"\b(?=\w){country[0]}|{country[0].lower()}\b(?!\w)")
 
         for res in results:
-            res["countries_mentioned"] = ""
 
             if bool(pattern_country.search(res["query_result"])):
                 print(f"Country found! {country[0]}")
