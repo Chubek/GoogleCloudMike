@@ -3,6 +3,7 @@ from apiclient.discovery import build
 import httplib2
 from google.cloud import bigquery
 
+
 def grab_data():
     credentials = ServiceAccountCredentials.from_json_keyfile_name('client_secrets.json', [
         'https://www.googleapis.com/auth/analytics.readonly'])

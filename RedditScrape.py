@@ -11,6 +11,8 @@ import random
 from praw.models import MoreComments
 import string
 import nltk
+from google.cloud import bigquery
+
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -43,7 +45,7 @@ def scrape_reddit():
 
     cities = cities_sheet.get_all_values()
     countries = countries_sheet.get_all_values()
-
+    client = bigquery.Client.from_service_account_json('client_secrets.json')
     results = []
 
     time = ['all', 'day', 'month', 'week', 'year']
@@ -74,6 +76,7 @@ def scrape_reddit():
         print(f"Search Done!")
 
     pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\040tap\bwater\.)")
+    result_num = 0
 
     for i, submissions in enumerate(submissions_list):
         try:
@@ -84,77 +87,89 @@ def scrape_reddit():
                     if isinstance(comment, MoreComments):
                         continue
                     if bool(pattern.search(comment.body)):
-                        results.append(
+                        result_num += 1
+                        results = (
                             {"query_result": comment.body,
                              "levenshtein_distance": nltk.edit_distance("tap water", comment.body),
                              "cities_mentioned": "",
                              "countries_mentioned": ""})
+
+                        try:
+                            rake = Rake(ranking_metric=Metric.DEGREE_TO_FREQUENCY_RATIO)
+                            rake.extract_keywords_from_text(results["query_result"])
+                            phrases = rake.get_ranked_phrases()
+                            results["key_phrases"] = phrases[1:]
+                            results["main_key_phrase"] = phrases[0]
+                        except:
+                            continue
+
+                        try:
+                            for city in cities[1:]:
+
+                                pattern_city = re.compile(rf"\b(?=\w)\b{city[0]}\b|\b{city[0].lower()}\b(?!\w)")
+                                pattern_nyc = re.compile(rf"\b(?=\w)\bNew\040York\b|\bnew\040york\b(?!\w)")
+
+                                for res in results:
+                                    if bool(pattern_city.search(results["query_result"])):
+                                        if city[0].strip() == "York":
+                                            if bool(pattern_nyc.search(results["query_result"])) and not bool(
+                                                    pattern_nyc.search(results["cities_mentioned"])):
+                                                res["cities_mentioned"] = results[
+                                                                              "cities_mentioned"] + f"New York, New York\n"
+                                                continue
+                                        if not bool(pattern_city.search(results["cities_mentioned"])):
+                                            res["cities_mentioned"] = results[
+                                                                          "cities_mentioned"] + f"{city[0]}, {city[1]}\n"
+                        except:
+                            continue
+
+                        try:
+                            for country in countries[1:]:
+
+                                pattern_country = re.compile(
+                                    rf"\b(?=\w)\b{country[0]}\b|\b{country[0].lower()}\b(?!\w)")
+
+                                for res in results:
+
+                                    if bool(pattern_country.search(results["query_result"])):
+                                        if not bool(pattern_country.search(results["countries_mentioned"])):
+                                            res["countries_mentioned"] = results[
+                                                                             "countries_mentioned"] + f"{country[0]}\n"
+                        except:
+                            continue
+
+                        client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.tap_water_reddit"),
+                                           [(results["query_result"], results["levenshtein_distance"].
+                                             results["cities_mentioned"], results["countries_mentioned"],
+                                             ", ".join(results["key_phrases"]), results["main_key_phrase"])])
+
+                        print(f"Row {result_num} inserted.")
         except:
             print("Failed, Continuing")
             continue
 
-    print(f"Found {len(results)} queries containing the phrase.")
 
-    for res in results:
-        rake = Rake(ranking_metric=Metric.DEGREE_TO_FREQUENCY_RATIO)
-        rake.extract_keywords_from_text(res["query_result"])
-        phrases = rake.get_ranked_phrases()
-        res["key_phrases"] = phrases[1:]
-        res["main_key_phrase"] = phrases[0]
 
-    for city in cities[1:]:
 
-        pattern_text_city = rf"\b(?=\w)\b{city[0]}\b|\b{city[0].lower()}\b(?!\w)"
-        print(f"Searching for city {city[0]}, {city[1]} with pattern {pattern_text_city}")
 
-        pattern_city = re.compile(rf"\b(?=\w)\b{city[0]}\b|\b{city[0].lower()}\b(?!\w)")
-        pattern_nyc = re.compile(rf"\b(?=\w)\bNew\040York\b|\bnew\040york\b(?!\w)")
 
-        for res in results:
-            if bool(pattern_city.search(res["query_result"])):
-                print(f"City found! {city[0]}")
-                if city[0].strip() == "York":
-                    print("York Detected! Checking for New York...")
-                    if bool(pattern_nyc.search(res["query_result"])) and not bool(
-                            pattern_nyc.search(res["cities_mentioned"])):
-                        res["cities_mentioned"] = res["cities_mentioned"] + f"New York, New York\n"
-                        print("New York added!")
-                        continue
-                if not bool(pattern_city.search(res["cities_mentioned"])):
-                    print("City added!")
-                    res["cities_mentioned"] = res["cities_mentioned"] + f"{city[0]}, {city[1]}\n"
 
-    for country in countries[1:]:
+    #letters = string.ascii_lowercase
+    #result_str = ''.join(random.choice(letters) for i in range(5))
 
-        pattern_text_country = rf"\b(?=\w)\b{country[0]}\b|\b{country[0].lower()}\b(?!\w)"
-        print(f"Searching for country {country[0]} with pattern {pattern_text_country}")
+    #worksheet_name = f"{str(datetime.datetime.now().date())} - {result_str}"
 
-        pattern_country = re.compile(rf"\b(?=\w)\b{country[0]}\b|\b{country[0].lower()}\b(?!\w)")
+    #sh_final = gc.open_by_url(
+     #   "https://docs.google.com/spreadsheets/d/1vBDJzaPKGS7-aEBmn0ZfgG6PiNNoVXjMjZhNZaGQCaw/edit#gid=0")
+    #worksheet_today = sh_final.add_worksheet(
+        #worksheet_name, rows="60000",
+        #cols="8")
 
-        for res in results:
+    #print(f"Created worksheet {worksheet_name}")
 
-            if bool(pattern_country.search(res["query_result"])):
-                print(f"Country found! {country[0]}")
-                if not bool(pattern_country.search(res["countries_mentioned"])):
-                    print("Country added!")
-                    res["countries_mentioned"] = res["countries_mentioned"] + f"{country[0]}\n"
-
-    letters = string.ascii_lowercase
-    result_str = ''.join(random.choice(letters) for i in range(5))
-
-    worksheet_name = f"{str(datetime.datetime.now().date())} - {result_str}"
-
-    sh_final = gc.open_by_url(
-        "https://docs.google.com/spreadsheets/d/1vBDJzaPKGS7-aEBmn0ZfgG6PiNNoVXjMjZhNZaGQCaw/edit#gid=0")
-    worksheet_today = sh_final.add_worksheet(
-        worksheet_name, rows="60000",
-        cols="8")
-
-    print(f"Created worksheet {worksheet_name}")
-
-    df = pd.DataFrame.from_records(results)
-    set_with_dataframe(worksheet_today, df)
-    format_with_dataframe(worksheet_today, df, include_column_header=True)
+    #df = pd.DataFrame.from_records(results)
+    #set_with_dataframe(worksheet_today, df)
+    #format_with_dataframe(worksheet_today, df, include_column_header=True)
 
     print("Done!")
 
