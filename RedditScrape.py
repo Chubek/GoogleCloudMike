@@ -69,7 +69,7 @@ def scrape_reddit():
     submissions_list = []
 
     for sub in sub_list:
-        print(f"Searching sub {sub}")
+        print(f"Searching sub {sub} from a list of {len(sub_list)}")
         submissions_list.append(reddit.subreddit(sub).search("tap AND water", time_filter='all'))
         print(f"Search Done!")
 
