@@ -147,7 +147,7 @@ def scrape_reddit():
     sh_final = gc.open_by_url(
         "https://docs.google.com/spreadsheets/d/1vBDJzaPKGS7-aEBmn0ZfgG6PiNNoVXjMjZhNZaGQCaw/edit#gid=0")
     worksheet_today = sh_final.add_worksheet(
-        worksheet_name, rows="133199",
+        worksheet_name, rows="60000",
         cols="8")
 
     print(f"Created worksheet {worksheet_name}")
