@@ -11,6 +11,7 @@ import random
 from praw.models import MoreComments
 import string
 import nltk
+nltk.download('stopwords')
 
 
 def scrape_reddit():
@@ -43,9 +44,12 @@ def scrape_reddit():
     results = []
 
     time = ['all', 'day', 'hour', 'month', 'week', 'year']
+    time_frame = time[random.randint(0, len(time) - 1)]
 
-    submissions = reddit.subreddit("all").search("tap AND water", time_filter=time[random.randint(0, len(time))])
-    print("Search Done!")
+    print(f"Searching in timeframe {time_frame}")
+
+    submissions = reddit.subreddit("all").search("tap AND water", time_filter=time_frame)
+    print(f"Search Done! Found {len(submissions)} results")
     pattern = re.compile("(?i)(?:\040tap\040.*\040water\040|\040tap\040water\\.)")
 
     for submission in submissions:
@@ -68,21 +72,23 @@ def scrape_reddit():
         res["main_key_phrase"] = phrases[0]
 
     for city in cities:
-        city_regex = re.compile(str(city))
+
+        print(f"Searching for city {city}")
 
         for res in results:
             res["cities_mentioned"] = []
             for key_phrase in res["key_phrases"]:
-                if bool(city_regex.search(key_phrase)):
+                if city.strip() in key_phrase:
                     res["cities_mentioned"].append(city)
 
     for country in countries:
-        country_regex = re.compile(str(country))
+
+        print(f"Searching for country {country}")
 
         for res in results:
             res["countries_mentioned"] = []
             for key_phrase in res["key_phrases"]:
-                if bool(country_regex.search(key_phrase)):
+                if country.strip() in key_phrase:
                     res["countries_mentioned"].append(country)
 
     letters = string.ascii_lowercase
