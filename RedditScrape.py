@@ -80,8 +80,6 @@ def scrape_reddit():
             for key_phrase in res["key_phrases"]:
                 if city[0].strip() in key_phrase:
                     res["cities_mentioned"].append(city[0])
-                else:
-                    res["cities_mentioned"].append("None")
 
     for country in countries[1:]:
 
@@ -92,8 +90,6 @@ def scrape_reddit():
             for key_phrase in res["key_phrases"]:
                 if country[0].strip() in key_phrase:
                     res["countries_mentioned"].append(country[0])
-                else:
-                    res["countries_mentioned"].append("None")
 
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(5))
