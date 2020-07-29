@@ -98,7 +98,7 @@ def scrape_reddit():
         pattern_city = re.compile(rf"\b(?=\w){city[0]}|{city[0].lower()}\b(?!\w)")
 
         for res in results:
-            res["cities_mentioned"] = None
+            res["cities_mentioned"] = ""
 
             if bool(pattern_city.search(res["query_result"])):
                 print(f"City found! {city[0]}")
@@ -112,7 +112,7 @@ def scrape_reddit():
         pattern_country = re.compile(rf"\b(?=\w){country[0]}|{country[0].lower()}\b(?!\w)")
 
         for res in results:
-            res["countries_mentioned"] = None
+            res["countries_mentioned"] = ""
 
             if bool(pattern_country.search(res["query_result"])):
                 print(f"Country found! {country[0]}")
