@@ -1,1 +1,1 @@
-python run RedditScrape.py
+python RedditScrape.py
