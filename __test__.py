@@ -2,25 +2,8 @@ from rake_nltk import Rake
 import re
 import pandas as pd
 
-r = Rake()
-r.extract_keywords_from_text("I was drinking tap water in Phoenix, Arizona the other day and I noticed that \
-                             the water is pretty salty. It's true about all arid regions in the United States at least, \
-                             aridity brings salty drinking water.")
+text = "In the Netherlands the price for our tap water is regulated at approximately 1 Euro per cubic metre (or 1000L of water). I rarely see people drinking flat bottled water and I can't remember when I last bought a bottle of water. The adoption of reusable bottles here has skyrocketed since some university students managed to make their bottle the fashionable item of the moment."
 
-words = r.get_ranked_phrases()
+pattern = re.compile(rf"\b(?=\w)Netherlands|netherlands\b(?!\w)")
 
-words.append("colonel los angeles")
-
-print(words[0])
-
-pattern = re.compile("los angeles")
-
-for word in words:
-    print(pattern.search(word))
-
-dict = [{"hello": ["py", "chi"], "hell": "tie"}, {"hello": "sie", "hell": "hi"}]
-
-df = pd.DataFrame.from_records(dict)
-
-
-print(df.head())
+print(bool(pattern.search(text)))

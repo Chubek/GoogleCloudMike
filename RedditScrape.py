@@ -13,6 +13,8 @@ import string
 import nltk
 nltk.download('stopwords')
 nltk.download('punkt')
+from bs4 import BeautifulSoup
+
 
 def scrape_reddit():
     reddit = praw.Reddit(client_id="o-ZP_mKBAwQJRQ",
@@ -46,10 +48,27 @@ def scrape_reddit():
     time = ['all', 'day', 'month', 'week', 'year']
     time_frame = time[random.randint(0, len(time) - 1)]
 
+    page = reddit.subreddit("ListOfSubreddits").wiki["listofsubreddits"]
+
+    soup = BeautifulSoup(page.content_html, "html.parser")
+
+    all_as = soup.find_all('a')
+
+    pattern = re.compile("\/r\/[a-z]+")
+
+    sub_list = []
+
+    for a in all_as:
+        text = a.get_text()
+        print(text)
+        if pattern.match(text):
+            sub_list.append(text.replace("/r/", ""))
+
     print(f"Searching in timeframe {time_frame}")
 
     submissions = reddit.subreddit("all").search("tap AND water", time_filter=time_frame)
     print(f"Search Done!")
+
     pattern = re.compile(r"(?i)(?:\040tap\040.*\040water\040|\040tap\040water\.)")
 
     for submission in submissions:
@@ -73,7 +92,8 @@ def scrape_reddit():
 
     for city in cities[1:]:
 
-        print(f"Searching for city {city[0]}, {city[1]}")
+        pattern_text_city = rf"\b(?=\w){city[0]}|{city[0].lower()}\b(?!\w)"
+        print(f"Searching for city {city[0]}, {city[1]} with pattern {pattern_text_city}")
 
         pattern_city = re.compile(rf"\b(?=\w){city[0]}|{city[0].lower()}\b(?!\w)")
 
@@ -81,11 +101,13 @@ def scrape_reddit():
             res["cities_mentioned"] = []
 
             if bool(pattern_city.search(res["query_result"])):
+                print(f"City found! {city[0]}")
                 res["cities_mentioned"].append(f"{city[0]}, {city[1]}")
 
     for country in countries[1:]:
 
-        print(f"Searching for country {country[0]}")
+        pattern_text_country = rf"\b(?=\w){country[0]}|{country[0].lower()}\b(?!\w)"
+        print(f"Searching for country {country[0]} with pattern {pattern_text_country}")
 
         pattern_country = re.compile(rf"\b(?=\w){country[0]}|{country[0].lower()}\b(?!\w)")
 
@@ -93,6 +115,7 @@ def scrape_reddit():
             res["countries_mentioned"] = []
 
             if bool(pattern_country.search(res["query_result"])):
+                print(f"Country found! {country[0]}")
                 res["countries_mentioned"].append(country[0])
 
     letters = string.ascii_lowercase
