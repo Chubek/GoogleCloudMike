@@ -75,20 +75,24 @@ def scrape_reddit():
 
         print(f"Searching for city {city[0]}")
 
+        pattern = re.compile(city[0].strip().lower())
+
         for res in results:
             res["cities_mentioned"] = []
             for key_phrase in res["key_phrases"]:
-                if city[0].strip() in key_phrase:
+                if bool(pattern.search(key_phrase.lower())):
                     res["cities_mentioned"].append(city[0])
 
     for country in countries[1:]:
 
         print(f"Searching for country {country[0]}")
 
+        pattern = re.compile(country[0].strip().lower())
+
         for res in results:
             res["countries_mentioned"] = []
             for key_phrase in res["key_phrases"]:
-                if country[0].strip() in key_phrase:
+                if bool(pattern.search(key_phrase.lower())):
                     res["countries_mentioned"].append(country[0])
 
     letters = string.ascii_lowercase
