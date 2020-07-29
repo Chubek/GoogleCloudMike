@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a9a0449c-363b-40e0-ae9d-f89caaa9b2a6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APIs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ApmaScrape.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LeverCompanies.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/15five.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/3pillarglobal.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/aeratechnology.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/aifoundation.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/alation.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/alchemy.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/algolia.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/alluxio.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/anagram.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/anjuna.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/anyroad.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/anyscale.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/apollo.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/apponboard.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/aquicore.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/armorblox.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/arrive.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/atom.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/aurorasolar.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/auth0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/automox.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/avvir.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/axon.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/b8ta.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/bakkt.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/baltosoftware.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/bambee.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/banyansecurity.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/beam.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/bentoforbusiness.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/bitwiseindustries.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/bluecore.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/boweryvaluation.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/brightmachines.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/brightwheel.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/bumblebeespaces.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/button.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/canarytechnologies.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/canvas.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/captivateiq.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/carejourney.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/centralreach.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/certik.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/cibotechnologies.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/circonus.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/clari.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/clinc.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/coder.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/coderpad.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/commure.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/confluent.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/contrastsecurity.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/convex.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/copper.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/corestream.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/cosential.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/couchbase.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/covariant.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/cresta.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/cultureiq.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/curbflow.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/datrium.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/deepgram.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/degreed.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/device42.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/digitalreasoning.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/ditto.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/docsend.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/doppler.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/dott.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/dragos.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/dremio.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/dronedeploy.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/ease.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/edenhealth.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/edlio.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/elementl.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/emailage.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/embark.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/emptor.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/enlitic.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/equals.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/eso.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/evident.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/fairmarkit.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/farmwise.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/fieldedge.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/figma.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/fivetran.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/fleetpanda.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/floqast.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/flueid.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/flywheel.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/forethought.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/forge.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/fortressiq.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/forwardnetworks.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/freedomrobotics.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/fungible.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/gloo.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/goguardian.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/gorgias.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/graphite.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/gravitational.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/graylog.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/harmony.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/harness.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/hatch.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/heartbeathealth.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/helbiz.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/highspot.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/hive.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/honeycomb.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/humanapi.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/humanity.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/hummingbird.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/icertis.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/illumix.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/immuta.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/integrate.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/ironox.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/izotope.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/jellyfish.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/kandji.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/kennasecurity.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/kiddom.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/kinsa.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/kogniz.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/labelbox.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/lambdaschool.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/launchdarkly.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/leantaas.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/light.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/lightmatter.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/logikcull.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/logrocket.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/lucid.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/lucidmotors.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/marketingevolution.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/mattermost.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/medallia.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/mendix.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/merit.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/metabase.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/mighty.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/nabis.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/nava.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/nearsoft.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/nexhealth.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/nexient.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/notarize.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/noteworth.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/ntopology.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/nuvalence.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/nuvocargo.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/nyansa.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/objective.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/ockam.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/offchainlabs.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/okera.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/opengov.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/orro.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/osaro.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/outlier.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/outrider.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/overjet.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/paralleldomain.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/payfone.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/peek.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/percipient.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/perfectprice.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/picktrace.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/pillartechnology.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/pipedrive.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/pivotalcommware.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/plaid.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/polarr.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/pollyex.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/preset.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/primegov.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/privacydynamics.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/projekt202.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/promptworks.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/propelplm.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/quantummetric.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/quickbase.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/quotapath.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/ramenvr.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/rapiddeploy.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/reachlabs.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/recurly.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/remine.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/render.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/rescale.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/restaurant365.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/revenueanalytics.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/rideos.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/rollbar.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/roojoom.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/roomservice.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/runtheworld.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/rylo.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sambanovasystems.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/say.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/scality.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/scopear.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sendoso.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sentieo.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/serverless.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sessionm.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sharpspring.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/shelfengine.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/shift5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sidebench.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/simpo.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sironamedical.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sisu.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sitetracker.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sketchfab.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/skupos.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/smartcar.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/snackpass.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/snapdocs.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/socialchorus.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/socotra.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sonatype.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sourcegraph.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/spartascience.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/splicemachine.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/spruce.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/starship.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/strongdm.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sugarcrm.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/sure.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/synthego.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/takeoff.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/tempo.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/tesorio.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/test.ai.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/threekit.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/thriveglobal.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/tipalti.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/tonkean.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/traceair.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/trackoff.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/trainual.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/transitscreen.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/twistle.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/typingdna.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/uipath.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/unifysquare.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/uniphore.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/unraveldata.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/updox.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/vendr.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/verkada.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/via.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/videahealth.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/vts.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/walkme.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/wandisco.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/whole.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/whoop.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/workramp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/woven.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/yaguara.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/yubico.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/zeplin.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/zignallabs.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/zipari.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lever_CSVs/zyper.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RedditScrape.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SubredditList.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__test__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__test__new.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apma.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/subreddits_list.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/urls.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/urls_breezy.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/GA2GBQ.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GA2GBQ.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1ezyKHOCPnoDKHDmyCFcv4XHoTT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../env-new" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/grabbers" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.__test__">
+    <configuration name="GA2GBQ" type="PythonConfigurationType" factoryName="Python">
+      <module name="GA2GBQ" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="LeverCompanies" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GA2GBQ" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LeverCompanies.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RedditScrape" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GA2GBQ" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RedditScrape.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SubredditList" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GA2GBQ" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SubredditList.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="__test__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GA2GBQ" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/__test__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="__test__new" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GA2GBQ" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/__test__new.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.__test__" />
+        <item itemvalue="Python.__test__new" />
+        <item itemvalue="Python.RedditScrape" />
+        <item itemvalue="Python.SubredditList" />
+        <item itemvalue="Python.LeverCompanies" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a9a0449c-363b-40e0-ae9d-f89caaa9b2a6" name="Default Changelist" comment="" />
+      <created>1595338650311</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1595338650311</updated>
+      <workItem from="1595338659281" duration="8325000" />
+      <workItem from="1595390783184" duration="18154000" />
+      <workItem from="1595430977165" duration="75000" />
+      <workItem from="1595564649001" duration="28000" />
+      <workItem from="1595564795238" duration="28326000" />
+      <workItem from="1595641753823" duration="10562000" />
+      <workItem from="1595730544647" duration="14374000" />
+      <workItem from="1595825266374" duration="14385000" />
+      <workItem from="1595910377475" duration="7456000" />
+      <workItem from="1595924155248" duration="25436000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2542" y="110" width="666" height="826" key="#GA2GBQ" timestamp="1595393015071">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2542" y="110" width="666" height="826" key="#GA2GBQ/1920.0.1920.1080/3840.109.1920.1080/0.27.1920.985@1920.0.1920.1080" timestamp="1595393015071" />
+    <state x="2576" y="321" width="598" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595593503143">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2576" y="321" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1595593503143" />
+    <state x="2576" y="321" width="598" height="403" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/3840.109.1920.1080/0.27.1920.985@1920.0.1920.1080" timestamp="1595419919889" />
+    <state x="2020" y="127" width="1720" height="785" key="DiffContextDialog" timestamp="1595954915478">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2020" y="127" width="1720" height="785" key="DiffContextDialog/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1595954915478" />
+    <state x="2658" y="283" width="424" height="491" key="FileChooserDialogImpl" timestamp="1595923420706">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2658" y="283" width="424" height="491" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1595923420706" />
+    <state width="1874" height="313" key="GridCell.Tab.0.bottom" timestamp="1596008802211">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="313" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1596008802211" />
+    <state width="1874" height="253" key="GridCell.Tab.0.bottom/1920.0.1920.1080/3840.109.1920.1080/0.27.1920.985@1920.0.1920.1080" timestamp="1595430952130" />
+    <state width="1874" height="313" key="GridCell.Tab.0.center" timestamp="1596008802211">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="313" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1596008802211" />
+    <state width="1874" height="253" key="GridCell.Tab.0.center/1920.0.1920.1080/3840.109.1920.1080/0.27.1920.985@1920.0.1920.1080" timestamp="1595430952130" />
+    <state width="1874" height="313" key="GridCell.Tab.0.left" timestamp="1596008802211">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="313" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1596008802211" />
+    <state width="1874" height="253" key="GridCell.Tab.0.left/1920.0.1920.1080/3840.109.1920.1080/0.27.1920.985@1920.0.1920.1080" timestamp="1595430952130" />
+    <state width="1874" height="313" key="GridCell.Tab.0.right" timestamp="1596008802211">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="313" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1596008802211" />
+    <state width="1874" height="253" key="GridCell.Tab.0.right/1920.0.1920.1080/3840.109.1920.1080/0.27.1920.985@1920.0.1920.1080" timestamp="1595430952130" />
+    <state width="1874" height="313" key="GridCell.Tab.1.bottom" timestamp="1596008802211">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="313" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1596008802211" />
+    <state width="1874" height="313" key="GridCell.Tab.1.center" timestamp="1596008802211">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="313" key="GridCell.Tab.1.center/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1596008802211" />
+    <state width="1874" height="313" key="GridCell.Tab.1.left" timestamp="1596008802211">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="313" key="GridCell.Tab.1.left/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1596008802211" />
+    <state width="1874" height="313" key="GridCell.Tab.1.right" timestamp="1596008802211">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="313" key="GridCell.Tab.1.right/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1596008802211" />
+    <state x="2369" y="154" width="1022" height="737" key="SettingsEditor" timestamp="1595924203094">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2369" y="154" width="1022" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1595924203094" />
+    <state x="2369" y="154" width="1022" height="737" key="SettingsEditor/1920.0.1920.1080/3840.109.1920.1080/0.27.1920.985@1920.0.1920.1080" timestamp="1595422071902" />
+    <state x="2544" y="162" width="672" height="676" key="search.everywhere.popup" timestamp="1595865964952">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2544" y="162" width="672" height="676" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1595865964952" />
+    <state x="2544" y="162" width="670" height="676" key="search.everywhere.popup/1920.0.1920.1080/3840.109.1920.1080/0.27.1920.985@1920.0.1920.1080" timestamp="1595407595500" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/GA2GBQ$__test__.coverage" NAME="__test__ Coverage Results" MODIFIED="1596007366774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA2GBQ$ApmaScrape.coverage" NAME="ApmaScrape Coverage Results" MODIFIED="1595690910494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA2GBQ$RedditScrape.coverage" NAME="RedditScrape Coverage Results" MODIFIED="1595949030105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA2GBQ$__test__new.coverage" NAME="__test__new Coverage Results" MODIFIED="1595957833865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA2GBQ$SubredditList.coverage" NAME="SubredditList Coverage Results" MODIFIED="1595938828189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA2GBQ$GA2GBQ.coverage" NAME="GA2GBQ Coverage Results" MODIFIED="1595418436714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA2GBQ$LeverCompanies.coverage" NAME="LeverCompanies Coverage Results" MODIFIED="1595857928523" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

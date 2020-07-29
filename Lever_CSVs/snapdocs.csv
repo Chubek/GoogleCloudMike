@@ -1,0 +1,34 @@
+,Positions,Locations,Categories
+0,Engagement Manager,Denver,Customer Success
+1,Engagement Manager,San Francisco,Customer Success
+2,Implementation Manager,Denver,Customer Success
+3,Implementation Manager,San Francisco,Customer Success
+4,"Manager, Implementation",Denver,Customer Success
+5,Engineering Manager,San Francisco,Engineering
+6,Engineering Manager,Denver,Engineering
+7,Senior QA Engineer,Denver,Engineering
+8,Senior QA Engineer,San Francisco,Engineering
+9,Senior Software Engineer,San Francisco,Engineering
+10,Senior Software Engineer,Denver,Engineering
+11,Senior Software Engineer,San Francisco,Engineering
+12,Software Engineer,San Francisco,Engineering
+13,Software Engineer,Denver,Engineering
+14,Strategy and Operations Manager,Denver,Finance
+15,Strategy and Operations Manager,San Francisco,Finance
+16,Head of Marketing,San Francisco,Marketing
+17,HR Business Partner,Denver,People
+18,Product Designer,Denver,Product
+19,Product Designer,San Francisco,Product
+20,Senior Product Manager - Security,Denver,Product
+21,Senior Product Manager - Security,San Francisco,Product
+22,Account Executive,Denver,Sales
+23,Account Executive,San Francisco,Sales
+24,Director of Revenue Operations,Denver,Sales
+25,Director of Revenue Operations,San Francisco,Sales
+26,Regional Sales Director,Denver,Sales
+27,Regional Sales Director,San Francisco,Sales
+28,IT Support Technician,Denver,Security
+29,Senior Security and Compliance Analyst,Denver,Security
+30,Customer Support Associate,Denver,User Operations
+31,User Operations Associate,Denver,User Operations
+32,Weekend Customer Support Associate,Denver,User Operations

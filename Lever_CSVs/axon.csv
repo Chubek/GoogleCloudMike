@@ -1,0 +1,113 @@
+,Positions,Locations,Categories
+0,Accounts Receivable Specialist,"Ho Chi Minh City, Vietnam",Accounting & Finance – Accounting
+1,General Ledger Staff Accountant,"Scottsdale, Arizona",Accounting & Finance – Accounting
+2,Revenue Accountant,"Seattle, WA or Scottsdale, AZ",Accounting & Finance – Accounting
+3,Business Solution Architect – Manufacturing,"Scottsdale, Arizona",Accounting & Finance – Business Process
+4,Senior Embedded / Firmware Engineer,"Ho Chi Minh City, Vietnam",Hardware Engineering – Sensors - Devices
+5,Product Security Engineer (Application Security),"Ho Chi Minh City, Vietnam",Information Security – Security Engineering
+6,Product Security Engineer (Application Security),"Seattle, Washington",Information Security – Security Engineering
+7,Product Security Engineer (Application Security),United States - Remote,Information Security – Security Engineering
+8,Product Security Engineer (Hardware/Firmware/IoT),"Seattle, Washington",Information Security – Security Engineering
+9,Product Security Engineer (Hardware/Firmware/IoT),United States - Remote,Information Security – Security Engineering
+10,Security Operations Engineer,"Ho Chi Minh City, Vietnam",Information Security – Security Operations
+11,Dynamics 365 Warehouse and Logistics Business Analyst,"Scottsdale, Arizona",Information Technology & Systems – Corporate IT
+12,Senior SQL Database Administrator,"Scottsdale, Arizona",Information Technology & Systems – Corporate IT
+13,Senior Product Marketing Manager,"Seattle, WA or Scottsdale, AZ",Marketing – Product Marketing
+14,"Director of Marketing, Events",United States - Remote,Marketing – Public Relations & Events
+15,Director of Global Quality,"Scottsdale, Arizona",Operations – Quality Assurance
+16,Manager Global Supplier Quality,"Scottsdale, Arizona",Operations – Quality Assurance
+17,Quality Engineer,"Scottsdale, Arizona",Operations – Quality Assurance
+18,RMA DC Supervisor,"Scottsdale, Arizona",Operations – RMA
+19,RMA Technician,"Scottsdale, Arizona",Operations – RMA
+20,Electrical Validation Engineer,"Scottsdale, Arizona",Operations – Validation
+21,Firmware Validation Engineer,"Scottsdale, Arizona",Operations – Validation
+22,Validation Manager,"Scottsdale, Arizona",Operations – Validation
+23,HRIS Analyst,"Scottsdale, Arizona",People Operations – Human Resources
+24,"Principal Product Manager, Real Time Operations","Seattle, Washington",Product Management – Communications
+25,Product Manager - Real time Communications,"Ho Chi Minh City, Vietnam",Product Management – Communications
+26,"Director, Product Management - Evidence.com","Seattle, Washington",Product Management – Digital Evidence Management & Devices
+27,Senior Product Manager,"Seattle, Washington",Product Management – Sensors - DEMS
+28,"Principal Product Manager, Device Services","Seattle, Washington",Product Management – Sensors - Devices
+29,"Product Manager, Body Worn Camera (Hardware)","Scottsdale, Arizona",Product Management – Sensors - Devices
+30,"Product Manager, Body Worn Camera (Software)","Seattle, Washington",Product Management – Sensors - Devices
+31,"Product Manager, Fleet Software","Seattle, Washington",Product Management – Sensors - Devices
+32,Senior Product Manager - Fleet Software,"Seattle, Washington",Product Management – Sensors - Devices
+33,"Senior Product Manager, Body Worn Camera","Seattle, Washington",Product Management – Sensors - Devices
+34,"Senior Customer Success Manager, Northeast (Remote)","Boston, Massachusetts",Sales – Customer Success
+35,Dispatch & Records Technical Support Engineer,"Scottsdale, Arizona",Sales – Customer Support
+36,Product Support Engineer - Fleet - Connected Devices,"Seattle, Washington",Sales – Customer Support
+37,Technical Support Representative - Germany,"Frankfurt, Germany",Sales – Customer Support
+38,"Instructional Designer, Virtual & Augmented Reality (AR/VR)","Seattle, WA or Scottsdale, AZ",Sales – E-Learning
+39,"Federal Strategic Account Executive, Department of Defense (DOD)","Washington, DC",Sales – Federal
+40,"Account Executive, Enterprise Partnerships (Remote - US)","Scottsdale, Arizona",Sales – Field Sales
+41,"Account Executive, New Products (Remote - US)","Scottsdale, Arizona",Sales – Field Sales
+42,"Strategic Account Executive, Major Accounts (Remote - NE / Midwest)","Chicago, Illinois",Sales – Field Sales
+43,"Strategic Account Executive, Private Security Partnerships (Remote - US)","Scottsdale, Arizona",Sales – Field Sales
+44,Account Representative (Inside),"Charlotte, North Carolina",Sales – Inside Sales
+45,Sales Representative (Inside),"Charlotte, North Carolina",Sales – Inside Sales
+46,Senior Account Representative (Inside / Travel Hybrid),"Charlotte, North Carolina",Sales – Inside Sales
+47,Senior Sales Representative (Inside / Travel Hybrid),"Charlotte, North Carolina",Sales – Inside Sales
+48,"Regional Sales Consultant, Andes Region","Lima, Peru",Sales – International Sales
+49,Sales Engineer,"Bangkok, Thailand",Sales – International Sales
+50,Cloud Services Engineer (Remote - US),"Scottsdale, Arizona",Sales – Professional Services
+51,Field Test Engineer (6 Month Contract),"Frankfurt, Germany",Sales – Professional Services
+52,Field Test Engineer (6 Month Contract),"Amsterdam, Netherlands",Sales – Professional Services
+53,Field Test Engineer (6 Month Contract),"Sydney, Australia",Sales – Professional Services
+54,Integrations Architect (Remote - US),United States - Remote,Sales – Professional Services
+55,Program Manager (Remote - US),United States - Remote,Sales – Professional Services
+56,Technical Analyst  (Remote - US),United States - Remote,Sales – Professional Services
+57,"Director, Sales Engineering (Scottsdale or Remote)","Scottsdale, Arizona",Sales – Sales Engineering
+58,Inside Sales Engineer (North Carolina),"Charlotte, North Carolina",Sales – Sales Engineering
+59,"NPI Program Manager, Sales Operations","Scottsdale, Arizona",Sales – Sales Operations
+60,Learning Systems Administrator and Developer,"Scottsdale, Arizona",Sales – Training
+61,Principal Applied Research Scientist (AI and Machine Learning),"Seattle, Washington",Software Engineering – Artificial Intelligence
+62,Principal Applied Research Scientist (AI and Machine Learning),"Ho Chi Minh City, Vietnam",Software Engineering – Artificial Intelligence
+63,Principal Machine Learning Platform Engineer,"Seattle, Washington",Software Engineering – Artificial Intelligence
+64,Principal Machine Learning Platform Engineer,"Ho Chi Minh City, Vietnam",Software Engineering – Artificial Intelligence
+65,"Principal Technical Program Manager, AI","Seattle, Washington",Software Engineering – Artificial Intelligence
+66,"Sr. Director of Applied Science, Machine Learning","Seattle, Washington",Software Engineering – Artificial Intelligence
+67,"Sr. Engineering Director, Machine Learning Platform","Seattle, Washington",Software Engineering – Artificial Intelligence
+68,Sr. Principal Applied Research Scientist (AI and Machine Learning),"Seattle, Washington",Software Engineering – Artificial Intelligence
+69,"Sr. Principal Engineer, Machine Learning Platform","Seattle, Washington",Software Engineering – Artificial Intelligence
+70,Sr. Principal Product Manager / Director of Product (AI and Machine Learning),"Seattle, Washington",Software Engineering – Artificial Intelligence
+71,"Frontend Engineer / Senior Engineer, Web Messaging","Ho Chi Minh City, Vietnam",Software Engineering – Communications
+72,QA Automation Engineer - Data Platform,"Ho Chi Minh City, Vietnam",Software Engineering – Communications
+73,"Senior Backend Engineer, Scale Squad","Ho Chi Minh City, Vietnam",Software Engineering – Communications
+74,"Senior Backend Engineer, Web Messaging","Ho Chi Minh City, Vietnam",Software Engineering – Communications
+75,Senior Data Engineer,"Scottsdale, Arizona",Software Engineering – Communications
+76,"Senior Engineering Manager, Real time Communications","Ho Chi Minh City, Vietnam",Software Engineering – Communications
+77,"Senior Full Stack Software Engineer, Scale squad","Ho Chi Minh City, Vietnam",Software Engineering – Communications
+78,"Senior Full Stack Software Engineer, Web Messaging","Ho Chi Minh City, Vietnam",Software Engineering – Communications
+79,"QA Engineering Manager, Digital Evidence Management System","Ho Chi Minh City, Vietnam",Software Engineering – Digital Evidence Management & Devices
+80,"Senior Frontend Engineer, React","Seattle, Washington",Software Engineering – Digital Evidence Management & Devices
+81,Mobile Application Developer - Federal Products,"Seattle, Washington",Software Engineering – Federal
+82,Senior Software Developer - Federal Products,"Seattle, Washington",Software Engineering – Federal
+83,Full-Stack Software Engineer - Transcription,"Ho Chi Minh City, Vietnam",Software Engineering – Record Management System
+84,"Principal Data Architect, Axon Records and Data Platform","Seattle, Washington",Software Engineering – Record Management System
+85,Senior Backend Engineer,"Seattle, Washington",Software Engineering – Record Management System
+86,Senior QA Automation Engineer- RMS,"Ho Chi Minh City, Vietnam",Software Engineering – Record Management System
+87,Software Architect - Data Platform,"Seattle, Washington",Software Engineering – Record Management System
+88,"Software Engineer, Axon Records","Scottsdale, Arizona",Software Engineering – Record Management System
+89,"Software Engineer, Axon Records","Scottsdale, Arizona",Software Engineering – Record Management System
+90,"Staff Software Engineer, Axon Records","Seattle, Washington",Software Engineering – Record Management System
+91,.NET Software Engineer,"Ho Chi Minh City, Vietnam",Software Engineering – Sensors - DEMS
+92,"Backend Engineer, Case Sharing","Seattle, Washington",Software Engineering – Sensors - DEMS
+93,Frontend Software Engineer - Evidence Viewing & Playback,"Ho Chi Minh City, Vietnam",Software Engineering – Sensors - DEMS
+94,"Senior Backend Engineer, Case Sharing","Seattle, Washington",Software Engineering – Sensors - DEMS
+95,"Senior Backend Engineer, Evidence Management","Seattle, Washington",Software Engineering – Sensors - DEMS
+96,Senior QA Automation Engineer,"Ho Chi Minh City, Vietnam",Software Engineering – Sensors - DEMS
+97,"Staff Backend Software Engineer, Case Management and Sharing","Seattle, Washington",Software Engineering – Sensors - DEMS
+98,"Senior Backend Engineer, Connected Devices","Seattle, Washington",Software Engineering – Sensors - Devices
+99,"Senior Frontend Engineer, Fleet","Seattle, Washington",Software Engineering – Sensors - Devices
+100,Senior Software Engineer - Sensors & Devices,"Seattle, Washington",Software Engineering – Sensors - Devices
+101,"Senior Software Engineer, Sensors Devices","Ho Chi Minh City, Vietnam",Software Engineering – Sensors - Devices
+102,Product Manager,"Ho Chi Minh City, Vietnam",Software Engineering – Shared Platform
+103,Senior Software Engineer,"Seattle, Washington",Software Engineering – Shared Platform
+104,"Senior Software Engineer, Platform","Seattle, Washington",Software Engineering – Shared Platform
+105,Software Engineer,"Seattle, Washington",Software Engineering – Shared Platform
+106,Director of Infrastructure Engineering,"Seattle, Washington",Software Engineering – Site Reliability Engineering
+107,Senior Site Reliability Engineer,"Seattle, Washington",Software Engineering – Site Reliability Engineering
+108,Senior Site Reliability Engineer - Cloud Operations,"Seattle, Washington",Software Engineering – Site Reliability Engineering
+109,Site Reliability Engineer,"Seattle, Washington",Software Engineering – Site Reliability Engineering
+110,Site Reliability Engineer,"Seattle, Washington",Software Engineering – Site Reliability Engineering
+111,Site Reliability Engineer (DevOps),"Ho Chi Minh City, Vietnam",Software Engineering – Site Reliability Engineering
