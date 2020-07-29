@@ -11,6 +11,7 @@ import random
 from praw.models import MoreComments
 import string
 import nltk
+
 nltk.download('stopwords')
 nltk.download('punkt')
 from bs4 import BeautifulSoup
@@ -60,28 +61,33 @@ def scrape_reddit():
 
     for a in all_as:
         text = a.get_text()
-        print(text)
         if pattern.match(text):
             sub_list.append(text.replace("/r/", ""))
 
     print(f"Searching in timeframe {time_frame}")
 
-    submissions = reddit.subreddit("all").search("tap AND water", time_filter=time_frame)
-    print(f"Search Done!")
+    submissions_list = []
+
+    for sub in sub_list:
+        print(f"Searching sub {sub}")
+        submissions_list.append(reddit.subreddit(sub).search("tap AND water", time_filter='all'))
+        print(f"Search Done!")
 
     pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\040tap\bwater\.)")
 
-    for submission in submissions:
-        submission.comments.replace_more(limit=0)
-        for comment in submission.comments:
-            if isinstance(comment, MoreComments):
-                continue
-            if bool(pattern.search(comment.body)):
-                results.append(
-                    {"query_result": comment.body,
-                     "levenshtein_distance": nltk.edit_distance("tap water", comment.body),
-                     "cities_mentioned": "",
-                     "countries_mentioned": ""})
+    for i, submissions in enumerate(submissions_list):
+        for j, submission in enumerate(submissions):
+            print(f"Checking submission {j} of {i}")
+            submission.comments.replace_more(limit=0)
+            for comment in submission.comments:
+                if isinstance(comment, MoreComments):
+                    continue
+                if bool(pattern.search(comment.body)):
+                    results.append(
+                        {"query_result": comment.body,
+                         "levenshtein_distance": nltk.edit_distance("tap water", comment.body),
+                         "cities_mentioned": "",
+                         "countries_mentioned": ""})
 
     print(f"Found {len(results)} queries containing the phrase.")
 
@@ -105,7 +111,8 @@ def scrape_reddit():
                 print(f"City found! {city[0]}")
                 if city[0].strip() == "York":
                     print("York Detected! Checking for New York...")
-                    if bool(pattern_nyc.search(res["query_result"])) and not bool(pattern_nyc.search(res["cities_mentioned"])):
+                    if bool(pattern_nyc.search(res["query_result"])) and not bool(
+                            pattern_nyc.search(res["cities_mentioned"])):
                         res["cities_mentioned"] = res["cities_mentioned"] + f"New York, New York\n"
                         print("New York added!")
                         continue
@@ -136,8 +143,8 @@ def scrape_reddit():
     sh_final = gc.open_by_url(
         "https://docs.google.com/spreadsheets/d/1vBDJzaPKGS7-aEBmn0ZfgG6PiNNoVXjMjZhNZaGQCaw/edit#gid=0")
     worksheet_today = sh_final.add_worksheet(
-        worksheet_name, rows="1500",
-        cols="20")
+        worksheet_name, rows="133199",
+        cols="8")
 
     print(f"Created worksheet {worksheet_name}")
 
