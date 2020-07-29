@@ -13,7 +13,6 @@ import string
 import nltk
 from google.cloud import bigquery
 
-
 nltk.download('stopwords')
 nltk.download('punkt')
 from bs4 import BeautifulSoup
@@ -46,7 +45,6 @@ def scrape_reddit():
     cities = cities_sheet.get_all_values()
     countries = countries_sheet.get_all_values()
     client = bigquery.Client.from_service_account_json('client_secrets.json')
-    results = []
 
     time = ['all', 'day', 'month', 'week', 'year']
     time_frame = time[random.randint(0, len(time) - 1)]
@@ -138,38 +136,35 @@ def scrape_reddit():
                         except:
                             continue
 
-                        client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.tap_water_reddit"),
-                                           [(results["query_result"], results["levenshtein_distance"].
-                                             results["cities_mentioned"], results["countries_mentioned"],
-                                             ", ".join(results["key_phrases"]), results["main_key_phrase"])])
+                        error = client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.tap_water_reddit"),
+                                                   [(results["query_result"], results["levenshtein_distance"].
+                                                     results["cities_mentioned"], results["countries_mentioned"],
+                                                     ", ".join(results["key_phrases"]), results["main_key_phrase"])])
 
-                        print(f"Row {result_num} inserted.")
+                        if not error:
+                            print(f"Row {result_num} inserted.")
+                        else:
+                            print(error)
         except:
             print("Failed, Continuing")
             continue
 
+    # letters = string.ascii_lowercase
+    # result_str = ''.join(random.choice(letters) for i in range(5))
 
+    # worksheet_name = f"{str(datetime.datetime.now().date())} - {result_str}"
 
+    # sh_final = gc.open_by_url(
+    #   "https://docs.google.com/spreadsheets/d/1vBDJzaPKGS7-aEBmn0ZfgG6PiNNoVXjMjZhNZaGQCaw/edit#gid=0")
+    # worksheet_today = sh_final.add_worksheet(
+    # worksheet_name, rows="60000",
+    # cols="8")
 
+    # print(f"Created worksheet {worksheet_name}")
 
-
-
-    #letters = string.ascii_lowercase
-    #result_str = ''.join(random.choice(letters) for i in range(5))
-
-    #worksheet_name = f"{str(datetime.datetime.now().date())} - {result_str}"
-
-    #sh_final = gc.open_by_url(
-     #   "https://docs.google.com/spreadsheets/d/1vBDJzaPKGS7-aEBmn0ZfgG6PiNNoVXjMjZhNZaGQCaw/edit#gid=0")
-    #worksheet_today = sh_final.add_worksheet(
-        #worksheet_name, rows="60000",
-        #cols="8")
-
-    #print(f"Created worksheet {worksheet_name}")
-
-    #df = pd.DataFrame.from_records(results)
-    #set_with_dataframe(worksheet_today, df)
-    #format_with_dataframe(worksheet_today, df, include_column_header=True)
+    # df = pd.DataFrame.from_records(results)
+    # set_with_dataframe(worksheet_today, df)
+    # format_with_dataframe(worksheet_today, df, include_column_header=True)
 
     print("Done!")
 

@@ -1,24 +1,14 @@
-from rake_nltk import Rake
-import re
-import pandas as pd
+from google.cloud import bigquery
 
-text = "In the Netherlands the price for our tap water is regulated at approximately 1 Euro per cubic metre (or 1000L of water). I rarely see people drinking flat bottled water and I can't remember when I last bought a bottle of water. The adoption of reusable bottles here has skyrocketed since some university students managed to make their bottle the fashionable item of the moment."
+client = bigquery.Client.from_service_account_json('client_secrets.json')
 
-pattern = re.compile(rf"\b(?=\w)Netherlands|netherlands\b(?!\w)")
-
-print(bool(pattern.search(text)))
-
-
-ditc_list = [{"hell": "rell"}, {"hell": "well"}]
-
-for dict in ditc_list:
-    dict["well"] = ""
-
-    if dict["hell"]:
-        dict["well"] = dict["well"] + " hell "
+error = client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.tap_water_reddit"),
+                   [("22", 22,
+                     "2323", "323423",
+                     "232", "323")])
 
 
-print(ditc_list)
 
 
-print(1 in zip([1, 3, 4], [2]))
+
+print(error)
