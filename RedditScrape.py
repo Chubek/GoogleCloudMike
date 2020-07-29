@@ -12,7 +12,7 @@ from praw.models import MoreComments
 import string
 import nltk
 nltk.download('stopwords')
-
+nltk.download('punkt')
 
 def scrape_reddit():
     reddit = praw.Reddit(client_id="o-ZP_mKBAwQJRQ",
