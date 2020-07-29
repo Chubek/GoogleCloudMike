@@ -79,6 +79,10 @@ def scrape_reddit():
 
         for res in results:
             res["cities_mentioned"] = []
+
+            if bool(pattern.search(res["main_key_phrase"].lower())):
+                res["cities_mentioned"].append(city[0])
+
             for key_phrase in res["key_phrases"]:
                 if bool(pattern.search(key_phrase.lower())):
                     res["cities_mentioned"].append(city[0])
@@ -91,6 +95,10 @@ def scrape_reddit():
 
         for res in results:
             res["countries_mentioned"] = []
+
+            if bool(pattern.search(res["main_key_phrase"].lower())):
+                res["countries_mentioned"].append(country[0])
+
             for key_phrase in res["key_phrases"]:
                 if bool(pattern.search(key_phrase.lower())):
                     res["countries_mentioned"].append(country[0])
