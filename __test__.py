@@ -19,3 +19,6 @@ for dict in ditc_list:
 
 
 print(ditc_list)
+
+
+print(1 in zip([1, 3, 4], [2]))
