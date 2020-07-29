@@ -73,7 +73,7 @@ def scrape_reddit():
 
     for city in cities[1:]:
 
-        print(f"Searching for city {city[0]}")
+        print(f"Searching for city {city[0]}, {city[1]}")
 
         pattern = re.compile(city[0].strip().lower())
 
@@ -81,7 +81,7 @@ def scrape_reddit():
             res["cities_mentioned"] = []
 
             if bool(pattern.search(res["query_result"].lower())):
-                res["cities_mentioned"].append(city[0])
+                res["cities_mentioned"].append(f"{city[0]}, {city[1]}")
 
     for country in countries[1:]:
 
