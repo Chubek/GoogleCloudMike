@@ -77,38 +77,37 @@ def scrape_reddit():
     result_num = 0
 
     for i, submissions in enumerate(submissions_list):
-
-        for j, submission in enumerate(submissions):
-            print(f"Checking submission {j} of {i}")
-            submission.comments.replace_more(limit=0)
-            for comment in submission.comments:
-                if isinstance(comment, MoreComments):
-                    continue
-                if bool(pattern.search(comment.body)):
-                    result_num += 1
-                    results = (
-                        {"query_result": comment.body,
-                         "levenshtein_distance": nltk.edit_distance("tap water", comment.body),
-                         "cities_mentioned": "",
-                         "countries_mentioned": ""})
-
-                    try:
-                        rake = Rake(ranking_metric=Metric.DEGREE_TO_FREQUENCY_RATIO)
-                        rake.extract_keywords_from_text(results["query_result"])
-                        phrases = rake.get_ranked_phrases()
-                        results["key_phrases"] = phrases[1:]
-                        results["main_key_phrase"] = phrases[0]
-                    except:
-                        print("Error with Rake")
+        try:
+            for j, submission in enumerate(submissions):
+                print(f"Checking submission {j} of {i}")
+                submission.comments.replace_more(limit=0)
+                for comment in submission.comments:
+                    if isinstance(comment, MoreComments):
                         continue
+                    if bool(pattern.search(comment.body)):
+                        result_num += 1
+                        results = (
+                            {"query_result": comment.body,
+                             "levenshtein_distance": nltk.edit_distance("tap water", comment.body),
+                             "cities_mentioned": "",
+                             "countries_mentioned": ""})
 
-                    try:
-                        for city in cities[1:]:
+                        try:
+                            rake = Rake(ranking_metric=Metric.DEGREE_TO_FREQUENCY_RATIO)
+                            rake.extract_keywords_from_text(results["query_result"])
+                            phrases = rake.get_ranked_phrases()
+                            results["key_phrases"] = phrases[1:]
+                            results["main_key_phrase"] = phrases[0]
+                        except:
+                            print("Error with Rake")
+                            continue
 
-                            pattern_city = re.compile(rf"\b(?=\w)\b{city[0]}\b|\b{city[0].lower()}\b(?!\w)")
-                            pattern_nyc = re.compile(rf"\b(?=\w)\bNew\040York\b|\bnew\040york\b(?!\w)")
+                        try:
+                            for city in cities[1:]:
 
-                            for res in results:
+                                pattern_city = re.compile(rf"\b(?=\w)\b{city[0]}\b|\b{city[0].lower()}\b(?!\w)")
+                                pattern_nyc = re.compile(rf"\b(?=\w)\bNew\040York\b|\bnew\040york\b(?!\w)")
+
                                 if bool(pattern_city.search(results["query_result"])):
                                     if city[0].strip() == "York":
                                         if bool(pattern_nyc.search(results["query_result"])) and not bool(
@@ -116,39 +115,41 @@ def scrape_reddit():
                                             results["cities_mentioned"] = results[
                                                                               "cities_mentioned"] + f"New York, New " \
                                                                                                     f"York\n "
-                                            continue
-                                        if not bool(pattern_city.search(results["cities_mentioned"])):
-                                            results["cities_mentioned"] = results[
-                                                                              "cities_mentioned"] + f"{city[0]}, " \
-                                                                                                    f"{city[1]}\n "
-                    except:
-                        print("Error with City")
-                        continue
+                                        continue
+                                    if not bool(pattern_city.search(results["cities_mentioned"])):
+                                        results["cities_mentioned"] = results[
+                                                                          "cities_mentioned"] + f"{city[0]}, " \
+                                                                                                f"{city[1]}\n "
+                        except:
+                            print("Error with City")
+                            continue
 
-                    try:
-                        for country in countries[1:]:
+                        try:
+                            for country in countries[1:]:
 
-                            pattern_country = re.compile(
-                                rf"\b(?=\w)\b{country[0]}\b|\b{country[0].lower()}\b(?!\w)")
-
-                            for res in results:
+                                pattern_country = re.compile(
+                                    rf"\b(?=\w)\b{country[0]}\b|\b{country[0].lower()}\b(?!\w)")
 
                                 if bool(pattern_country.search(results["query_result"])):
                                     if not bool(pattern_country.search(results["countries_mentioned"])):
                                         results["countries_mentioned"] = results[
                                                                              "countries_mentioned"] + f"{country[0]}\n"
-                    except:
-                        continue
+                        except:
+                            print("Problem with country")
+                            continue
 
-                    error = client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.tap_water_reddit"),
-                                               [(results["query_result"], int(results["levenshtein_distance"]),
-                                                 results["cities_mentioned"], results["countries_mentioned"],
-                                                 ", ".join(results["key_phrases"]), results["main_key_phrase"])])
+                        error = client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.tap_water_reddit"),
+                                                   [(results["query_result"], int(results["levenshtein_distance"]),
+                                                     results["cities_mentioned"], results["countries_mentioned"],
+                                                     ", ".join(results["key_phrases"]), results["main_key_phrase"])])
 
-                    if not error:
-                        print(f"Row {result_num} inserted.")
-                    else:
-                        print(error)
+                        if not error:
+                            print(f"Row {result_num} inserted.")
+                        else:
+                            print(error)
+        except:
+            print("The whole thing failed.")
+            continue
 
     # letters = string.ascii_lowercase
     # result_str = ''.join(random.choice(letters) for i in range(5))
