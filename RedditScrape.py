@@ -105,8 +105,9 @@ def scrape_reddit():
                 print(f"City found! {city[0]}")
                 if city[0].strip() == "York":
                     print("York Detected! Checking for New York...")
-                    if bool(pattern_nyc.search(res["query_result"])):
+                    if bool(pattern_nyc.search(res["query_result"])) and not bool(pattern_nyc.search(res["cities_mentioned"])):
                         res["cities_mentioned"] = res["cities_mentioned"] + f"New York, New York\n"
+                        print("New York added!")
                         continue
                 if not bool(pattern_city.search(res["cities_mentioned"])):
                     print("City added!")
