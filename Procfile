@@ -1,1 +1,1 @@
-python RedditScrape.py
+heroku run python -u RedditScrape.py
