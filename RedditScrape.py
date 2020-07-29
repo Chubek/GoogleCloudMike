@@ -50,7 +50,7 @@ def scrape_reddit():
 
     submissions = reddit.subreddit("all").search("tap AND water", time_filter=time_frame)
     print(f"Search Done!")
-    pattern = re.compile("(?i)(?:\040tap\040.*\040water\040|\040tap\040water\\.)")
+    pattern = re.compile(r"(?i)(?:\040tap\040.*\040water\040|\040tap\040water\.)")
 
     for submission in submissions:
         submission.comments.replace_more(limit=0)
@@ -75,24 +75,24 @@ def scrape_reddit():
 
         print(f"Searching for city {city[0]}, {city[1]}")
 
-        pattern = re.compile(city[0].strip().lower())
+        pattern_city = re.compile(rf"\b(?=\w){city[0]}|{city[0].lower()}\b(?!\w)")
 
         for res in results:
             res["cities_mentioned"] = []
 
-            if bool(pattern.search(res["query_result"].lower())):
+            if bool(pattern_city.search(res["query_result"])):
                 res["cities_mentioned"].append(f"{city[0]}, {city[1]}")
 
     for country in countries[1:]:
 
         print(f"Searching for country {country[0]}")
 
-        pattern = re.compile(country[0].strip().lower())
+        pattern_country = re.compile(rf"\b(?=\w){country[0]}|{country[0].lower()}\b(?!\w)")
 
         for res in results:
             res["countries_mentioned"] = []
 
-            if bool(pattern.search(res["query_result"].lower())):
+            if bool(pattern_country.search(res["query_result"])):
                 res["countries_mentioned"].append(country[0])
 
     letters = string.ascii_lowercase
