@@ -101,9 +101,11 @@ def scrape_reddit():
 
         for res in results:
 
-            if bool(pattern_city.search(res["query_result"])) and not bool(pattern.search(res["cities_mentioned"])):
+            if bool(pattern_city.search(res["query_result"])):
                 print(f"City found! {city[0]}")
-                res["cities_mentioned"] = res["cities_mentioned"] + f"{city[0]}, {city[1]}\n"
+                if not bool(pattern_city.search(res["cities_mentioned"])):
+                    print("City added!")
+                    res["cities_mentioned"] = res["cities_mentioned"] + f"{city[0]}, {city[1]}\n"
 
     for country in countries[1:]:
 
@@ -114,9 +116,11 @@ def scrape_reddit():
 
         for res in results:
 
-            if bool(pattern_country.search(res["query_result"])) and not bool(pattern_country.search(res["countries_mentioned"])):
+            if bool(pattern_country.search(res["query_result"])):
                 print(f"Country found! {country[0]}")
-                res["countries_mentioned"] = res["countries_mentioned"] + f"{country[0]}\n"
+                if not bool(pattern_country.search(res["countries_mentioned"])):
+                    print("Country added!")
+                    res["countries_mentioned"] = res["countries_mentioned"] + f"{country[0]}\n"
 
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(5))
