@@ -43,13 +43,13 @@ def scrape_reddit():
 
     results = []
 
-    time = ['all', 'day', 'hour', 'month', 'week', 'year']
+    time = ['all', 'day', 'month', 'week', 'year']
     time_frame = time[random.randint(0, len(time) - 1)]
 
     print(f"Searching in timeframe {time_frame}")
 
     submissions = reddit.subreddit("all").search("tap AND water", time_filter=time_frame)
-    print(f"Search Done! Found {len(submissions)} results")
+    print(f"Search Done!")
     pattern = re.compile("(?i)(?:\040tap\040.*\040water\040|\040tap\040water\\.)")
 
     for submission in submissions:
