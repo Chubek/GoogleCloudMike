@@ -94,28 +94,28 @@ def scrape_reddit():
 
     for city in cities[1:]:
 
-        pattern_text_city = rf"\b(?=\w){city[0]}|{city[0].lower()}\b(?!\w)"
+        pattern_text_city = rf"\b(?=\w){city[0]}|\040{city[0].lower()}\b(?!\w)"
         print(f"Searching for city {city[0]}, {city[1]} with pattern {pattern_text_city}")
 
-        pattern_city = re.compile(rf"\b(?=\w){city[0]}|{city[0].lower()}\b(?!\w)")
+        pattern_city = re.compile(rf"\b(?=\w){city[0]}|\040{city[0].lower()}\b(?!\w)")
 
         for res in results:
 
             if bool(pattern_city.search(res["query_result"])):
-                print(f"City found! {city[0]}")
+                print(f"City found! {city[0]} in " + res["query_result"])
                 res["cities_mentioned"] = res["cities_mentioned"] + f"{city[0]}, {city[1]}\n"
 
     for country in countries[1:]:
 
-        pattern_text_country = rf"\b(?=\w){country[0]}|{country[0].lower()}\b(?!\w)"
+        pattern_text_country = rf"\b(?=\w){country[0]}|\040{country[0].lower()}\b(?!\w)"
         print(f"Searching for country {country[0]} with pattern {pattern_text_country}")
 
-        pattern_country = re.compile(rf"\b(?=\w){country[0]}|{country[0].lower()}\b(?!\w)")
+        pattern_country = re.compile(rf"\b(?=\w){country[0]}|\040{country[0].lower()}\b(?!\w)")
 
         for res in results:
 
             if bool(pattern_country.search(res["query_result"])):
-                print(f"Country found! {country[0]}")
+                print(f"Country found! {country[0]} in " + res["query_result"])
                 res["countries_mentioned"] = res["countries_mentioned"] + f"{country[0]}\n"
 
     letters = string.ascii_lowercase
