@@ -76,18 +76,22 @@ def scrape_reddit():
     pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\040tap\bwater\.)")
 
     for i, submissions in enumerate(submissions_list):
-        for j, submission in enumerate(submissions):
-            print(f"Checking submission {j} of {i}")
-            submission.comments.replace_more(limit=0)
-            for comment in submission.comments:
-                if isinstance(comment, MoreComments):
-                    continue
-                if bool(pattern.search(comment.body)):
-                    results.append(
-                        {"query_result": comment.body,
-                         "levenshtein_distance": nltk.edit_distance("tap water", comment.body),
-                         "cities_mentioned": "",
-                         "countries_mentioned": ""})
+        try:
+            for j, submission in enumerate(submissions):
+                print(f"Checking submission {j} of {i}")
+                submission.comments.replace_more(limit=0)
+                for comment in submission.comments:
+                    if isinstance(comment, MoreComments):
+                        continue
+                    if bool(pattern.search(comment.body)):
+                        results.append(
+                            {"query_result": comment.body,
+                             "levenshtein_distance": nltk.edit_distance("tap water", comment.body),
+                             "cities_mentioned": "",
+                             "countries_mentioned": ""})
+        except:
+            print("Failed, Continuing")
+            continue
 
     print(f"Found {len(results)} queries containing the phrase.")
 
