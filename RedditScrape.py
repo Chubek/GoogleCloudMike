@@ -98,15 +98,16 @@ def scrape_reddit():
         print(f"Searching for city {city[0]}, {city[1]} with pattern {pattern_text_city}")
 
         pattern_city = re.compile(rf"\b(?=\w)\b{city[0]}\b|\b{city[0].lower()}\b(?!\w)")
+        pattern_nyc = re.compile(rf"\b(?=\w)\bNew\040York\b|\bnew\040york\b(?!\w)")
 
         for res in results:
-
             if bool(pattern_city.search(res["query_result"])):
                 print(f"City found! {city[0]}")
-                if city[0].strip() == "New York":
-                    print("City added! The city was New York, which is an exception.")
-                    res["cities_mentioned"] = res["cities_mentioned"] + f"{city[0]}, {city[1]}\n"
-                    continue
+                if city[0].strip() == "York":
+                    print("York Detected! Checking for New York...")
+                    if bool(pattern_nyc.search(res["query_result"])):
+                        res["cities_mentioned"] = res["cities_mentioned"] + f"New York, New York\n"
+                        continue
                 if not bool(pattern_city.search(res["cities_mentioned"])):
                     print("City added!")
                     res["cities_mentioned"] = res["cities_mentioned"] + f"{city[0]}, {city[1]}\n"
