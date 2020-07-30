@@ -68,7 +68,7 @@ def scrape_reddit():
 
     submissions_list = []
 
-    for sub in sub_list:
+    for sub in sub_list[80:]:
         print(f"Searching sub {sub} from a list of {len(sub_list)}")
         submissions_list.append(reddit.subreddit(sub).search("tap AND water", time_filter='all'))
         print(f"Search Done!")
@@ -106,7 +106,7 @@ def scrape_reddit():
 
                             if bool(pattern_city.search(submission.selftext)):
                                 if city[0].strip() == "York":
-                                    if bool(pattern_nyc.search(results["query_result"])) and not bool(
+                                    if bool(pattern_nyc.search(submission.selftext)) and not bool(
                                             pattern_nyc.search(results["cities_mentioned"])):
                                         results["cities_mentioned"] = results["cities_mentioned"] + f"New York, New " \
                                                                                                     f"York\n "
@@ -143,6 +143,7 @@ def scrape_reddit():
 
                     if not error:
                         print(f"Row {result_num} inserted.")
+                        result_num += 1
                     else:
                         print(error)
 
