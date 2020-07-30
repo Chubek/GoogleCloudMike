@@ -68,18 +68,18 @@ def scrape_reddit():
 
     submissions_list = []
 
-    for sub in sub_list[400:]:
+    for sub in sub_list[822:]:
         print(f"Searching sub {sub} from a list of {len(sub_list)}")
         submissions_list.append(reddit.subreddit(sub).search("tap AND water", time_filter='all'))
         print(f"Search Done!")
 
     pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\040tap\bwater\.)")
-    result_num = 3055
+    result_num = 5419
 
     for i, submissions in enumerate(submissions_list):
         try:
             for j, submission in enumerate(submissions):
-                print(f"Checking submission {j} of {i}")
+                print(f"Checking submission {j} of {i + 822}")
                 submission.comments.replace_more(limit=0)
                 for comment in submission.comments:
                     if isinstance(comment, MoreComments):
@@ -147,6 +147,8 @@ def scrape_reddit():
                             print(f"Row {result_num} inserted.")
                         else:
                             print(error)
+
+                        del results
         except:
             print("The whole thing failed.")
             continue

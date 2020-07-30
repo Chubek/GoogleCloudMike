@@ -2,15 +2,35 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import os.path
+import gspread
+from google.oauth2.service_account import Credentials
 
-urls = [url.strip() for url in open("urls.txt", "r").readlines()]
+scopes = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive'
+]
+
+credentials = Credentials.from_service_account_file(
+    'client_secrets.json',
+    scopes=scopes
+)
+
+gc = gspread.authorize(credentials)
+
+sh = gc.open("Breezy_Urls_Shared_1")
+
+worksheet = sh.get_worksheet(0)
+
+urls = worksheet.get_all_values()
 
 positions = []
 locations = []
+types = []
 categories = []
 url_names = []
 
-for url in urls:
+for url_arr in urls[1:]:
+    url = url_arr[1]
     print(f"Working on {url}")
     name = url.split("/")[-1]
     req = requests.get(url)
@@ -19,7 +39,11 @@ for url in urls:
 
     print(req.status_code)
 
-    postings = soup.find_all('div', {"class": "posting"})
+    try:
+        postings = soup.find_all('div', {"class": "positions-container"})
+    except:
+        print("Not positions-container. Continuing...")
+        continue
 
     print(postings)
     print(len(postings))
@@ -29,17 +53,31 @@ for url in urls:
         continue
 
     for posting in postings:
-        positions.append(posting.h5.get_text())
-        url_names.append(url)
-        spans = posting.find_all('span')
-        if len(spans) > 0:
-            locations.append(spans[0].get_text())
-            if len(spans) >= 2:
-                categories.append(spans[1].get_text())
-            else:
+        if url not in url_names:
+            url_names.append(url)
+            try:
+                positions.append(posting.h2.get_text() or "Not Specified")
+            except:
+                print("Problem with positions!")
+                positions.append("Not Specified!")
+            try:
+                locations.append(posting.find('li', {'class': 'location'}).span.get_text())
+            except:
+                print("Problem with locations!")
+                locations.append("Not Specified")
+            try:
+                types.append(posting.find('li', {'class': 'type'}).span.get_text())
+            except:
+                print("Problem with types!")
+                types.append("Not Specified")
+            try:
+                categories.append(posting.find('li', {'class': 'department'}).span.get_text())
+            except:
+                print("Problem with categories!")
                 categories.append("Not Specified")
 
 df = pd.DataFrame(
-    {"Positions": positions, "Locations": locations, "Categories": categories, "URL Names": url_names})
-df.to_csv(os.path.join("Lever_CSVs", f"whole.csv"))
+    {"Positions": positions, "Locations": locations, "Type": types, "Categories": categories, "URL Names": url_names})
+
+df.to_csv(os.path.join("BreezyCSVs", f"whole.csv"))
 print("Saved!")
