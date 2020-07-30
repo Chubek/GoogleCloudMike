@@ -11,10 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9a0449c-363b-40e0-ae9d-f89caaa9b2a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BreezyCSVs/whole.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RedditScrape.py" beforeDir="false" afterPath="$PROJECT_DIR$/RedditScrape.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__test__new.py" beforeDir="false" afterPath="$PROJECT_DIR$/__test__new.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +224,7 @@
       <workItem from="1595825266374" duration="14385000" />
       <workItem from="1595910377475" duration="7456000" />
       <workItem from="1595924155248" duration="51176000" />
-      <workItem from="1596050628123" duration="15349000" />
+      <workItem from="1596050628123" duration="17292000" />
     </task>
     <servers />
   </component>

@@ -68,87 +68,85 @@ def scrape_reddit():
 
     submissions_list = []
 
-    for sub in sub_list[822:]:
+    for sub in sub_list:
         print(f"Searching sub {sub} from a list of {len(sub_list)}")
         submissions_list.append(reddit.subreddit(sub).search("tap AND water", time_filter='all'))
         print(f"Search Done!")
 
-    pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\040tap\bwater\.)")
-    result_num = 5419
+    pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap\b)")
+    result_num = 1
 
     for i, submissions in enumerate(submissions_list):
         try:
             for j, submission in enumerate(submissions):
-                print(f"Checking submission {j} of {i + 822}")
-                submission.comments.replace_more(limit=0)
-                for comment in submission.comments:
-                    if isinstance(comment, MoreComments):
+                print(f"Checking submission {j} of {i}")
+                if bool(pattern.search(submission.selftext)):
+                    results = {"title": submission.title,
+                               "upvotes": submission.score,
+                               "time": submission.created_utc,
+                               "permalink": submission.permalink,
+                               "num_comments": submission.num_comments,
+                               "cities_mentioned": "",
+                               "countries_mentioned": ""}
+
+                    try:
+                        rake = Rake(ranking_metric=Metric.DEGREE_TO_FREQUENCY_RATIO)
+                        rake.extract_keywords_from_text(submission.selftext)
+                        phrases = rake.get_ranked_phrases()
+                        results["key_phrases"] = phrases
+                    except:
+                        print("Error with Rake")
                         continue
-                    if bool(pattern.search(comment.body)):
-                        result_num += 1
-                        results = (
-                            {"query_result": comment.body,
-                             "levenshtein_distance": nltk.edit_distance("tap water", comment.body),
-                             "cities_mentioned": "",
-                             "countries_mentioned": ""})
 
-                        try:
-                            rake = Rake(ranking_metric=Metric.DEGREE_TO_FREQUENCY_RATIO)
-                            rake.extract_keywords_from_text(results["query_result"])
-                            phrases = rake.get_ranked_phrases()
-                            results["key_phrases"] = phrases[1:]
-                            results["main_key_phrase"] = phrases[0]
-                        except:
-                            print("Error with Rake")
-                            continue
+                    try:
+                        for city in cities[1:]:
 
-                        try:
-                            for city in cities[1:]:
+                            pattern_city = re.compile(rf"\b(?=\w)\b{city[0]}\b|\b{city[0].lower()}\b(?!\w)")
+                            pattern_nyc = re.compile(rf"\b(?=\w)\bNew\040York\b|\bnew\040york\b(?!\w)")
 
-                                pattern_city = re.compile(rf"\b(?=\w)\b{city[0]}\b|\b{city[0].lower()}\b(?!\w)")
-                                pattern_nyc = re.compile(rf"\b(?=\w)\bNew\040York\b|\bnew\040york\b(?!\w)")
-
-                                if bool(pattern_city.search(results["query_result"])):
-                                    if city[0].strip() == "York":
-                                        if bool(pattern_nyc.search(results["query_result"])) and not bool(
-                                                pattern_nyc.search(results["cities_mentioned"])):
-                                            results["cities_mentioned"] = results[
-                                                                              "cities_mentioned"] + f"New York, New " \
+                            if bool(pattern_city.search(submission.selftext)):
+                                if city[0].strip() == "York":
+                                    if bool(pattern_nyc.search(results["query_result"])) and not bool(
+                                            pattern_nyc.search(results["cities_mentioned"])):
+                                        results["cities_mentioned"] = results["cities_mentioned"] + f"New York, New " \
                                                                                                     f"York\n "
                                         continue
                                     if not bool(pattern_city.search(results["cities_mentioned"])):
                                         results["cities_mentioned"] = results[
                                                                           "cities_mentioned"] + f"{city[0]}, " \
                                                                                                 f"{city[1]}\n "
-                        except:
-                            print("Error with City")
-                            continue
+                    except:
+                        print("Error with City")
+                        continue
 
-                        try:
-                            for country in countries[1:]:
+                    try:
+                        for country in countries[1:]:
 
-                                pattern_country = re.compile(
-                                    rf"\b(?=\w)\b{country[0]}\b|\b{country[0].lower()}\b(?!\w)")
+                            pattern_country = re.compile(
+                                rf"\b(?=\w)\b{country[0]}\b|\b{country[0].lower()}\b(?!\w)")
 
-                                if bool(pattern_country.search(results["query_result"])):
-                                    if not bool(pattern_country.search(results["countries_mentioned"])):
-                                        results["countries_mentioned"] = results[
-                                                                             "countries_mentioned"] + f"{country[0]}\n"
-                        except:
-                            print("Problem with country")
-                            continue
+                            if bool(pattern_country.search(submission.selftext)):
+                                if not bool(pattern_country.search(results["countries_mentioned"])):
+                                    results["countries_mentioned"] = results[
+                                                                         "countries_mentioned"] + f"{country[0]}\n"
+                    except:
+                        print("Problem with country")
+                        continue
 
-                        error = client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.tap_water_reddit"),
-                                                   [(results["query_result"], int(results["levenshtein_distance"]),
-                                                     results["cities_mentioned"], results["countries_mentioned"],
-                                                     ", ".join(results["key_phrases"]), results["main_key_phrase"])])
+                    error = client.insert_rows(
+                        client.get_table("cydtw-site.reddit_tap_water.reddit_tap_water_submissions"),
+                        [(results["title"], results["permalink"],
+                          str(results["upvotes"]), str(results["time"]),
+                          ", ".join(results["key_phrases"]), results["cities_mentioned"],
+                          results["countries_mentioned"],
+                          int(results["num_comments"]))])
 
-                        if not error:
-                            print(f"Row {result_num} inserted.")
-                        else:
-                            print(error)
+                    if not error:
+                        print(f"Row {result_num} inserted.")
+                    else:
+                        print(error)
 
-                        del results
+                    del results
         except:
             print("The whole thing failed.")
             continue
