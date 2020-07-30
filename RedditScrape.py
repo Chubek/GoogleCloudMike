@@ -68,13 +68,13 @@ def scrape_reddit():
 
     submissions_list = []
 
-    for sub in sub_list:
+    for sub in sub_list[400:]:
         print(f"Searching sub {sub} from a list of {len(sub_list)}")
         submissions_list.append(reddit.subreddit(sub).search("tap AND water", time_filter='all'))
         print(f"Search Done!")
 
     pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\040tap\bwater\.)")
-    result_num = 0
+    result_num = 3055
 
     for i, submissions in enumerate(submissions_list):
         try:
