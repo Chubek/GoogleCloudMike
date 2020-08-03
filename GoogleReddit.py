@@ -209,16 +209,13 @@ def get_google_reddit_tap_water():
                                     else:
                                         break
 
-                                try:
-                                    error = client.insert_rows(
-                                        client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"),
-                                        rows)
+                                error = client.insert_rows(
+                                    client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"),
+                                    rows)
 
-                                    if not error:
-                                        print(f"{len(rows)} rows inserted.")
-                                except:
-                                    print("Insert unsuccessful")
-                                    continue
+                                if not error:
+                                    print(f"{len(rows)} rows inserted.")
+
                         except:
                             continue
 
