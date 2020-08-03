@@ -217,6 +217,8 @@ def get_google_reddit_tap_water():
                                         rows)
                                     if not error:
                                         print(f"{len(rows)} rows inserted.")
+                                    else:
+                                        print(error)
                                 except:
                                     print("Error inserting data.")
 
