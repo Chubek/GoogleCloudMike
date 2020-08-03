@@ -156,7 +156,7 @@ def get_google_reddit_tap_water():
                                         submission.permalink, submission.title,
                                         submission.selftext, key_phrase, city_contains,
                                         country_contains,
-                                        thread_id)]
+                                        thread_id, query)]
 
                                 print(f"row is {row}")
 
@@ -241,7 +241,7 @@ def get_google_reddit_tap_water():
                                                         permalink, "",
                                                         text, key_phrase, city_post,
                                                         country_post,
-                                                        thread_id)]
+                                                        thread_id, query)]
 
                                                 print(f"inner row {row}")
 
@@ -254,7 +254,7 @@ def get_google_reddit_tap_water():
                                                     print(error)
 
                                                 del time_posted, text, score, permalink, country_post, row, thread_id, \
-                                                    city_post, r, error
+                                                    city_post, r, error, query
 
                                     except:
                                         print("Operation expired. Reconnecting...")
