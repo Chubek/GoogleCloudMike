@@ -73,9 +73,9 @@ def get_google_reddit_tap_water():
 
     query_num = 0
     row_num = 0
-    for city in cities[1:]:
-        city = city[0]
-        city_country = city[1]
+    for city_ in cities[1:]:
+        city = city_[0]
+        city_country = city_[1]
         for country in countries[1:]:
             country = country[0]
             query = f"tap AND water AND ({city} OR {country})"
