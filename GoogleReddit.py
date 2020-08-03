@@ -126,13 +126,26 @@ def get_google_reddit_tap_water():
                             if bool(pattern.search(submission.selftext)) or bool(pattern.search(submission.title)):
                                 print("Submission contains the keywords.")
                                 thread_id = submission.id
-                                r = Rake()
-                                r.extract_keywords_from_text(submission.selftext)
+                                key_phrase = ""
 
-                                country_contains = country if bool(
-                                    pattern_country.search(submission.selftext)) else ""
-                                city_contains = f"{city}, {city_country}" if bool(
-                                    city_country.search(submission.selftext)) else ""
+                                try:
+                                    r = Rake()
+                                    r.extract_keywords_from_text(submission.selftext)
+                                    key_phrase = r.get_ranked_phrases()[0]
+                                    print(f"keyphrase is {key_phrase}")
+                                except:
+                                    print("Error getting keyphrase")
+
+                                country_contains = ""
+                                city_contains = ""
+
+                                try:
+                                    country_contains = country if bool(
+                                        pattern_country.search(submission.selftext)) else ""
+                                    city_contains = f"{city}, {city_country}" if bool(
+                                        city_country.search(submission.selftext)) else ""
+                                except:
+                                    print("Failed getting city and country contains")
 
                                 print(f"City contains {city_contains} and country contains {country_contains}")
 
@@ -141,7 +154,7 @@ def get_google_reddit_tap_water():
                                         True, str(datetime.datetime.fromtimestamp(submission.created_utc)),
                                         str(submission.score),
                                         submission.permalink, submission.title,
-                                        submission.selftext, r.get_ranked_phrases()[0], city_contains,
+                                        submission.selftext, key_phrase, city_contains,
                                         country_contains,
                                         thread_id)]
 
@@ -202,17 +215,31 @@ def get_google_reddit_tap_water():
 
                                             if bool(pattern.match(text)):
                                                 print("Got matching text")
-                                                r = Rake()
-                                                r.extract_keywords_from_text(text)
 
-                                                country_post = country if bool(pattern_country.search(text)) else ""
-                                                city_post = f"{city}, {city_country}" if bool(
-                                                    pattern_city.search(text)) else ""
+                                                key_phrase = ""
+
+                                                try:
+                                                    r = Rake()
+                                                    r.extract_keywords_from_text(text)
+                                                    key_phrase = r.get_ranked_phrases()[0]
+                                                    print(f"keyphrase {key_phrase}")
+                                                except:
+                                                    print("Error getting keyphrase")
+
+                                                country_post = ""
+                                                city_post = ""
+
+                                                try:
+                                                    country_post = country if bool(pattern_country.search(text)) else ""
+                                                    city_post = f"{city}, {city_country}" if bool(
+                                                        pattern_city.search(text)) else ""
+                                                except:
+                                                    print("Error getting city and country for post")
 
                                                 row = [(False, time_posted,
                                                         score,
                                                         permalink, "",
-                                                        text, r.get_ranked_phrases()[0], city_post,
+                                                        text, key_phrase, city_post,
                                                         country_post,
                                                         thread_id)]
 
