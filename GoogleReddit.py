@@ -45,11 +45,14 @@ def get_google_reddit_tap_water():
 
     SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
     API_KEY = "AIzaSyCjuHRi_hJDXGBsGKSO4nTaz5k4EQ4K1WI"
+    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
     service = build("customsearch", "v1", developerKey=API_KEY)
 
     options = Options()
     options.add_argument("--no-sandbox")
+    options.add_argument('--disable-gpu')
     options.add_argument('headless')
     options.add_argument("start-maximized")
     options.add_argument("disable-infobars")
@@ -57,7 +60,8 @@ def get_google_reddit_tap_water():
     options.add_argument("--disable-gpu")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument('--remote-debugging-port=9222')
-    driver = webdriver.Chrome(executable_path='./chromedriver', options=options)
+    options.binary_location = GOOGLE_CHROME_PATH
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, options=options)
 
     reddit = praw.Reddit(client_id="o-ZP_mKBAwQJRQ",
                          client_secret="KCfO1wo6DVVfP8zAKVYWOP8KHEQ",
