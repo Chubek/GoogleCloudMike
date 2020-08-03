@@ -17,6 +17,7 @@ from rake_nltk import Metric, Rake
 import nltk
 import datetime
 import os
+import textwrap
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -117,8 +118,12 @@ def get_google_reddit_tap_water():
 
                         try:
                             submission = reddit.submission(url=url.replace("old", "www"))
-                            print(f"Got submission with ID {submission.id}")
-                            if bool(pattern.search(submission.selfpost)):
+                            print(f"Got submission with ID {submission.id} with title "
+                                  f"{textwrap.shorten(submission.title, width=10)} with "
+                                  f"keywords {pattern.search(submission.title)} and "
+                                  f"selfpost {textwrap.shorten(submission.selfpost, width=20)} with "
+                                  f"keywords {pattern.search(submission.selfpost)}")
+                            if bool(pattern.search(submission.selfpost)) or bool(pattern.search(submission.title)):
                                 print("Submission contains the keywords.")
                                 thread_id = submission.id
                                 r = Rake()
@@ -153,12 +158,12 @@ def get_google_reddit_tap_water():
                                             permalink = ""
 
                                             try:
-                                                ime_posted = tagline.find_element_by_tag_name(
+                                                time_posted = tagline.find_element_by_tag_name(
                                                     'time').get_attribute('title')
                                             except:
                                                 print("Couldn't get time.")
 
-                                            print("Got time")
+                                            print(f"Got time {time_posted}")
                                             try:
                                                 text = comment.find_element_by_class_name(
                                                     'md').find_element_by_css_selector(
@@ -166,13 +171,13 @@ def get_google_reddit_tap_water():
                                             except:
                                                 print("Couldn't get text")
 
-                                            print("Got text")
+                                            print(f"Got text {textwrap.shorten(text, width=20)}")
                                             try:
                                                 score = tagline.find_element_by_css_selector(".score.unvoted").text
                                             except:
                                                 print("Couldn't get score")
 
-                                            print("Got score!")
+                                            print(f"Got score {score}")
                                             try:
                                                 permalink = comment.find_element_by_class_name(
                                                     'bylink').get_attribute(
@@ -180,7 +185,7 @@ def get_google_reddit_tap_water():
                                             except:
                                                 print("Couldn't get link.")
 
-                                            print("Got link!")
+                                            print(f"Got link {permalink}")
 
                                             if score and time_posted and text and permalink:
                                                 r = Rake()
