@@ -117,8 +117,9 @@ def get_google_reddit_tap_water():
 
                         try:
                             submission = reddit.submission(url=url.replace("old", "www"))
-
+                            print(f"Got submission with ID {submission.id}")
                             if bool(pattern.search(submission.selfpost)):
+                                print("Submission contains the keywords.")
                                 thread_id = submission.id
                                 r = Rake()
                                 r.extract_keywords_from_text(submission.selfpost)
