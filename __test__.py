@@ -24,6 +24,4 @@ oo = [(True, str(datetime.datetime(2016, 9, 14, 12, 25, 40)), str(0), '/r/paris/
 
 client = bigquery.Client.from_service_account_json('client_secrets.json')
 
-error = client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"), oo)
-
-print(error)
+print(len(oo))

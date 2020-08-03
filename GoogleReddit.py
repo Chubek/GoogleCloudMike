@@ -44,7 +44,7 @@ def get_google_reddit_tap_water():
     cities = cities_sheet.get_all_values()
     countries = countries_sheet.get_all_values()
     client = bigquery.Client.from_service_account_json('client_secrets.json')
-
+    table = client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water")
     SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
     API_KEY = "AIzaSyCjuHRi_hJDXGBsGKSO4nTaz5k4EQ4K1WI"
     GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
@@ -72,7 +72,7 @@ def get_google_reddit_tap_water():
                          username="OceanLinerXLL")
 
     query_num = 0
-
+    row_num = 0
     for city in cities[1:]:
         city = city[0]
         city_country = city[1]
@@ -131,15 +131,24 @@ def get_google_reddit_tap_water():
 
                                 country_contains = country if bool(
                                     pattern_country.search(submission.selftext)) else ""
+                                city_contains = f"{city}, {city_country}" if bool(
+                                    city_country.search(submission.selftext)) else ""
 
-                                rows.append(
+                                row = [
                                     (
                                         True, str(datetime.datetime.fromtimestamp(submission.created_utc)),
                                         str(submission.score),
                                         submission.permalink, submission.title,
-                                        submission.selftext, r.get_ranked_phrases()[0], f"{city}, {city_country}",
+                                        submission.selftext, r.get_ranked_phrases()[0], city_contains,
                                         country_contains,
-                                        thread_id))
+                                        thread_id)]
+
+                                error = client.insert_rows(table, row)
+                                if not error:
+                                    print(f"Row number {row_num} inserted")
+                                    row_num += 1
+                                else:
+                                    print(error)
 
                                 the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
                                 print(f"found {len(the_comment)} comments.")
@@ -187,7 +196,8 @@ def get_google_reddit_tap_water():
 
                                             print(f"Got link {permalink}")
 
-                                            if score and time_posted and text and permalink:
+                                            if bool(pattern.match(text)):
+                                                print("Got matching text")
                                                 r = Rake()
                                                 r.extract_keywords_from_text(text)
 
@@ -195,12 +205,23 @@ def get_google_reddit_tap_water():
                                                 city_post = f"{city}, {city_country}" if bool(
                                                     pattern_city.search(text)) else ""
 
-                                                rows.append((False, time_posted,
-                                                             score,
-                                                             permalink, "",
-                                                             text, r.get_ranked_phrases()[0], city_post,
-                                                             country_post,
-                                                             thread_id))
+                                                row = [(False, time_posted,
+                                                        score,
+                                                        permalink, "",
+                                                        text, r.get_ranked_phrases()[0], city_post,
+                                                        country_post,
+                                                        thread_id)]
+
+                                                error = client.insert_rows(table, row)
+
+                                                if not error:
+                                                    print(f"Row number {row_num} inserted.")
+                                                    row_num += 1
+                                                else:
+                                                    print(error)
+
+                                                del time_posted, text, score, permalink, country_post, row, thread_id, \
+                                                    city_post, r, error
 
                                     except:
                                         print("Operation expired. Reconnecting...")
@@ -209,14 +230,6 @@ def get_google_reddit_tap_water():
                                         continue
                                     else:
                                         break
-
-                                error = client.insert_rows(
-                                    client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"),
-                                    rows)
-                                if not error:
-                                    print(f"{len(rows)} rows inserted.")
-                                else:
-                                    print(error)
 
 
                         except:
