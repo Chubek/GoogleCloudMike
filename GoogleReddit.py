@@ -16,6 +16,7 @@ from google.cloud import bigquery
 from rake_nltk import Metric, Rake
 import nltk
 import datetime
+import os
 
 nltk.download('stopwords')
 nltk.download('punkt')
