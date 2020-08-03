@@ -134,8 +134,8 @@ def get_google_reddit_tap_water():
 
                                 rows.append(
                                     (
-                                        True, datetime.datetime.fromtimestamp(submission.created_utc),
-                                        submission.score,
+                                        True, str(datetime.datetime.fromtimestamp(submission.created_utc)),
+                                        str(submission.score),
                                         submission.permalink, submission.title,
                                         submission.selftext, r.get_ranked_phrases()[0], f"{city}, {city_country}",
                                         country_contains,
@@ -209,8 +209,6 @@ def get_google_reddit_tap_water():
                                         continue
                                     else:
                                         break
-
-                                print(rows)
 
                                 error = client.insert_rows(
                                     client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"),
