@@ -132,12 +132,12 @@ def get_google_reddit_tap_water():
 
                                         tagline = comment.find_element_by_class_name('tagline')
                                         score = ""
-                                        time = ""
+                                        time_posted = ""
                                         text = ""
                                         permalink = ""
 
                                         try:
-                                            time = tagline.find_element_by_tag_name('time').get_attribute('title')
+                                            time_posted = tagline.find_element_by_tag_name('time').get_attribute('title')
                                         except:
                                             print("Couldn't get time.")
                                         finally:
@@ -164,10 +164,10 @@ def get_google_reddit_tap_water():
                                         finally:
                                             print("Got link!")
 
-                                        if score and time and text and permalink:
+                                        if score and time_posted and text and permalink:
                                             r = Rake()
                                             r.extract_keywords_from_text(text)
-                                            rows.append((False, time,
+                                            rows.append((False, time_posted,
                                                          score,
                                                          permalink, "",
                                                          text, r.get_ranked_phrases()[0], city, country,
