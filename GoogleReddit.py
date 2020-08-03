@@ -202,7 +202,6 @@ def get_google_reddit_tap_water():
                                                              country_post,
                                                              thread_id))
 
-                                                del score, text, time_posted, permalink, country_post, city_post, r
                                     except:
                                         print("Operation expired. Reconnecting...")
                                         the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
@@ -210,6 +209,8 @@ def get_google_reddit_tap_water():
                                         continue
                                     else:
                                         break
+
+                                print(rows)
 
                                 error = client.insert_rows(
                                     client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"),
