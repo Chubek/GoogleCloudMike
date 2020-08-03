@@ -97,7 +97,9 @@ def get_google_reddit_tap_water():
             try:
                 for item in the_result.get("items"):
                     urls.append(item.get("link").replace("www", "old"))
-
+            except:
+                print("No items.")
+                continue
 
             for url in urls:
                 print(f"Operating on {url}")
