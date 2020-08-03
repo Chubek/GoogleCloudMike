@@ -111,7 +111,7 @@ def get_google_reddit_tap_water():
 
                         rows = []
 
-                        pattern = re.compile(rf"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap.\b{city}\b)")
+                        pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap\b)")
                         pattern_country = re.compile(rf"(?i)(?:\b{country}\b)")
                         pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
 
