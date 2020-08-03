@@ -1,17 +1,21 @@
 from google.cloud import bigquery
 from difflib import SequenceMatcher
 import datetime
-client = bigquery.Client.from_service_account_json('client_secrets.json')
+import pprint
 
-error = client.insert_rows(client.get_table("cydtw-site.reddit_tap_water.tap_water_reddit"),
-                   [("22", 22,
-                     "2323", "323423",
-                     "232", "323")])
+from googleapiclient.discovery import build
 
+SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
+API_KEY = "AIzaSyCjuHRi_hJDXGBsGKSO4nTaz5k4EQ4K1WI"
 
+service = build("customsearch", "v1", developerKey=API_KEY)
+the_result = service.cse().list(q="tap AND water AND (Paris OR France)", cx=SEARCH_ENGINE_ID).execute()
 
+urls = []
 
+for item in the_result.get("items"):
+    urls.append(item.get("link").replace("www", "old"))
 
-print(SequenceMatcher("hello", "hello").ratio())
+print(urls)
+pprint.pprint(the_result)
 
-print(datetime.date.fromordinal("Tue Jul 28 18:36:12 2020 UTC"))

@@ -72,8 +72,11 @@ def get_google_reddit_tap_water():
 
     query_num = 0
 
-    for city in cities:
-        for country in countries:
+    for city in cities[1:]:
+        city = city[0]
+        city_country = city[1]
+        for country in countries[1:]:
+            country = country[0]
             query = f"tap AND water AND {city} OR {country}"
             print(f"Searching for {query}. Query number: {query_num}")
 
@@ -89,14 +92,15 @@ def get_google_reddit_tap_water():
                 else:
                     print(f"Skipping {city} and {country}")
                     continue
-                finally:
-                    print("Search successful.")
 
             urls = []
 
-            for res in the_result:
-                for item in res.get('items')[0]:
-                    urls.append(item.get('link'))
+            try:
+                for item in the_result.get("items"):
+                    urls.append(item.get("link").replace("www", "old"))
+            except:
+                print("No items.")
+                continue
 
             for url in urls:
                 driver.get(url)
@@ -123,7 +127,8 @@ def get_google_reddit_tap_water():
                             rows.append(
                                 (True, datetime.datetime.fromtimestamp(submission.created_utc), submission.score,
                                  submission.permalink, submission.title,
-                                 submission.selfpost, r.get_ranked_phrases()[0], city, country, thread_id))
+                                 submission.selfpost, r.get_ranked_phrases()[0], f"{city}, {city_country}", country,
+                                 thread_id))
 
                             the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
 
@@ -145,29 +150,29 @@ def get_google_reddit_tap_water():
                                             time_posted = tagline.find_element_by_tag_name('time').get_attribute('title')
                                         except:
                                             print("Couldn't get time.")
-                                        finally:
-                                            print("Got time")
+
+                                        print("Got time")
                                         try:
                                             text = comment.find_element_by_class_name(
                                                 'md').find_element_by_css_selector(
                                                 'p').text
                                         except:
                                             print("Couldn't get text")
-                                        finally:
-                                            print("Got text")
+
+                                        print("Got text")
                                         try:
                                             score = tagline.find_element_by_css_selector(".score.unvoted").text
                                         except:
                                             print("Couldn't get score")
-                                        finally:
-                                            print("Got score!")
+
+                                        print("Got score!")
                                         try:
                                             permalink = comment.find_element_by_class_name('bylink').get_attribute(
                                                 "href")
                                         except:
                                             print("Couldn't get link.")
-                                        finally:
-                                            print("Got link!")
+
+                                        print("Got link!")
 
                                         if score and time_posted and text and permalink:
                                             r = Rake()
@@ -175,7 +180,8 @@ def get_google_reddit_tap_water():
                                             rows.append((False, time_posted,
                                                          score,
                                                          permalink, "",
-                                                         text, r.get_ranked_phrases()[0], city, country,
+                                                         text, r.get_ranked_phrases()[0], f"{city}, {city_country}",
+                                                         country,
                                                          thread_id))
                                 except:
                                     print("Operation expired. Reconnecting...")
@@ -184,8 +190,7 @@ def get_google_reddit_tap_water():
                                     continue
                                 else:
                                     break
-                                finally:
-                                    print("All done!")
+
 
                             try:
                                 error = client.insert_rows(
@@ -201,8 +206,10 @@ def get_google_reddit_tap_water():
                 except:
                     print("This URL failed. Continuing.")
                     continue
-                finally:
-                    print("This done.")
+
+                del rows, urls, the_result, submission
+
+                print("This done.")
 
     driver.close()
     driver.quit()
