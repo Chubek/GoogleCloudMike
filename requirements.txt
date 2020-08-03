@@ -13,3 +13,5 @@ beautifulsoup4~=4.9.1
 nltk~=3.5
 rake-nltk~=1.0.4
 praw~=7.1.0
+google_search~=1.0.2
+selenium~=3.141.0
