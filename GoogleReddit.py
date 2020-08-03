@@ -143,7 +143,7 @@ def get_google_reddit_tap_water():
                                     country_contains = country if bool(
                                         pattern_country.search(submission.selftext)) else ""
                                     city_contains = f"{city}, {city_country}" if bool(
-                                        city_country.search(submission.selftext)) else ""
+                                        pattern_city.search(submission.selftext)) else ""
                                 except:
                                     print("Failed getting city and country contains")
 
