@@ -77,15 +77,14 @@ def get_google_reddit_tap_water():
         city_country = city[1]
         for country in countries[1:]:
             country = country[0]
-            query = f"tap AND water AND {city} OR {country}"
+            query = f"tap AND water AND ({city} OR {country})"
             print(f"Searching for {query}. Query number: {query_num}")
 
             the_result = None
 
             for i in range(20):
                 try:
-                    the_result = service.cse().list(q=query, cx=SEARCH_ENGINE_ID,
-                                                    num=100).execute()
+                    the_result = service.cse().list(q=query, cx=SEARCH_ENGINE_ID).execute()
                     query_num += 1
                 except:
                     print(f"Search failed. Retrying {i}/20")
@@ -112,8 +111,9 @@ def get_google_reddit_tap_water():
 
                 rows = []
 
-                pattern = re.compile(rf"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap.\b{city}\b|\b{country}\b)")
-
+                pattern = re.compile(rf"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap.\b{city}\b)")
+                pattern_country = re.compile(rf"(?i)(?:\b{country}\b)")
+                pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
                 submission = reddit.submission(url=url)
                 thread_id = ""
 
@@ -124,10 +124,13 @@ def get_google_reddit_tap_water():
                             r = Rake()
                             r.extract_keywords_from_text(submission.selfpost)
 
+                            country_contains = country if bool(pattern_country.search(submission.selfpost)) else ""
+
                             rows.append(
                                 (True, datetime.datetime.fromtimestamp(submission.created_utc), submission.score,
                                  submission.permalink, submission.title,
-                                 submission.selfpost, r.get_ranked_phrases()[0], f"{city}, {city_country}", country,
+                                 submission.selfpost, r.get_ranked_phrases()[0], f"{city}, {city_country}",
+                                 country_contains,
                                  thread_id))
 
                             the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
@@ -177,11 +180,15 @@ def get_google_reddit_tap_water():
                                         if score and time_posted and text and permalink:
                                             r = Rake()
                                             r.extract_keywords_from_text(text)
+
+                                            country_post = country if bool(pattern_country.search(text)) else ""
+                                            city_post = f"{city}, {city_country}" if bool(pattern_city.search(text)) else ""
+
                                             rows.append((False, time_posted,
                                                          score,
                                                          permalink, "",
-                                                         text, r.get_ranked_phrases()[0], f"{city}, {city_country}",
-                                                         country,
+                                                         text, r.get_ranked_phrases()[0], city_post,
+                                                         country_post,
                                                          thread_id))
                                 except:
                                     print("Operation expired. Reconnecting...")
