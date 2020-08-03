@@ -46,7 +46,7 @@ def get_google_reddit_tap_water():
 
     SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
     API_KEY = "AIzaSyCjuHRi_hJDXGBsGKSO4nTaz5k4EQ4K1WI"
-    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
     CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
     service = build("customsearch", "v1", developerKey=API_KEY)
