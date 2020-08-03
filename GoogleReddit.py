@@ -201,6 +201,8 @@ def get_google_reddit_tap_water():
                                                              text, r.get_ranked_phrases()[0], city_post,
                                                              country_post,
                                                              thread_id))
+
+                                                del score, text, time_posted, permalink, country_post, city_post, r
                                     except:
                                         print("Operation expired. Reconnecting...")
                                         the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
@@ -209,16 +211,14 @@ def get_google_reddit_tap_water():
                                     else:
                                         break
 
-                                print(f"Got {len(rows)} rows.")
-
-                                error = client.insert_rows(
-                                    client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"),
-                                    rows)
-
-                                if not error:
-                                    print(f"{len(rows)} rows inserted.")
-                                else:
-                                    print(error)
+                                try:
+                                    error = client.insert_rows(
+                                        client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"),
+                                        rows)
+                                    if not error:
+                                        print(f"{len(rows)} rows inserted.")
+                                except:
+                                    print("Error inserting data.")
 
                         except:
                             continue
