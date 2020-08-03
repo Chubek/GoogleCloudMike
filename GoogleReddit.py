@@ -134,6 +134,8 @@ def get_google_reddit_tap_water():
                                 city_contains = f"{city}, {city_country}" if bool(
                                     city_country.search(submission.selftext)) else ""
 
+                                print(f"City contains {city_contains} and country contains {country_contains}")
+
                                 row = [
                                     (
                                         True, str(datetime.datetime.fromtimestamp(submission.created_utc)),
@@ -142,6 +144,8 @@ def get_google_reddit_tap_water():
                                         submission.selftext, r.get_ranked_phrases()[0], city_contains,
                                         country_contains,
                                         thread_id)]
+
+                                print(f"row is {row}")
 
                                 error = client.insert_rows(table, row)
                                 if not error:
@@ -211,6 +215,8 @@ def get_google_reddit_tap_water():
                                                         text, r.get_ranked_phrases()[0], city_post,
                                                         country_post,
                                                         thread_id)]
+
+                                                print(f"inner row {row}")
 
                                                 error = client.insert_rows(table, row)
 
