@@ -121,23 +121,23 @@ def get_google_reddit_tap_water():
                             print(f"Got submission with ID {submission.id} with title "
                                   f"{textwrap.shorten(submission.title, width=10)} with "
                                   f"keywords {pattern.search(submission.title)} and "
-                                  f"selfpost {textwrap.shorten(submission.selfpost, width=20)} with "
-                                  f"keywords {pattern.search(submission.selfpost)}")
-                            if bool(pattern.search(submission.selfpost)) or bool(pattern.search(submission.title)):
+                                  f"selftext {textwrap.shorten(submission.selftext, width=20)} with "
+                                  f"keywords {pattern.search(submission.selftext)}")
+                            if bool(pattern.search(submission.selftext)) or bool(pattern.search(submission.title)):
                                 print("Submission contains the keywords.")
                                 thread_id = submission.id
                                 r = Rake()
-                                r.extract_keywords_from_text(submission.selfpost)
+                                r.extract_keywords_from_text(submission.selftext)
 
                                 country_contains = country if bool(
-                                    pattern_country.search(submission.selfpost)) else ""
+                                    pattern_country.search(submission.selftext)) else ""
 
                                 rows.append(
                                     (
                                         True, datetime.datetime.fromtimestamp(submission.created_utc),
                                         submission.score,
                                         submission.permalink, submission.title,
-                                        submission.selfpost, r.get_ranked_phrases()[0], f"{city}, {city_country}",
+                                        submission.selftext, r.get_ranked_phrases()[0], f"{city}, {city_country}",
                                         country_contains,
                                         thread_id))
 

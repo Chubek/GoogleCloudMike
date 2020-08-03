@@ -1,21 +1,24 @@
-from google.cloud import bigquery
-from difflib import SequenceMatcher
+import praw
+import textwrap
+import re
 import datetime
-import pprint
+pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap\b)")
 
-from googleapiclient.discovery import build
+reddit = praw.Reddit(client_id="o-ZP_mKBAwQJRQ",
+                     client_secret="KCfO1wo6DVVfP8zAKVYWOP8KHEQ",
+                     password="lasvegas",
+                     user_agent="Water Safety Grab by /u/OceanLinerXLL",
+                     username="OceanLinerXLL")
 
-SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
-API_KEY = "AIzaSyCjuHRi_hJDXGBsGKSO4nTaz5k4EQ4K1WI"
+submission = reddit.submission(url="https://old.reddit.com/r/paris/comments/cak84x/can_i_drink_tap_water_in_paris/".replace("old", "www"))
+print(f"Got submission with ID {submission.id} with title "
+                                  f"{textwrap.shorten(submission.title, width=30)} with "
+                                  f"keywords {pattern.search(submission.title)} and "
+                                  f"selfpost {textwrap.shorten(submission.selftext, width=30)} with "
+                                  f"keywords {pattern.search(submission.selftext)}")
 
-service = build("customsearch", "v1", developerKey=API_KEY)
-the_result = service.cse().list(q="tap AND water AND (Paris OR France)", cx=SEARCH_ENGINE_ID).execute()
 
-urls = []
 
-for item in the_result.get("items"):
-    urls.append(item.get("link").replace("www", "old"))
 
-print(urls)
-pprint.pprint(the_result)
 
+print(datetime.datetime.fromtimestamp(submission.created_utc))
