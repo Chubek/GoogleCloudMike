@@ -101,118 +101,122 @@ def get_google_reddit_tap_water():
                 print("No items.")
                 continue
 
-            for url in urls:
-                print(f"Operating on {url}")
-                driver.get(url)
-                driver.find_element_by_name('user').send_keys("OceanLinerXLL")
-                driver.find_element_by_name('passwd').send_keys("lasvegas")
-                element_submit_button = driver.find_element_by_class_name('btn')
-                webdriver.ActionChains(driver).move_to_element(element_submit_button).click(
-                    element_submit_button).perform()
-
-                rows = []
-
-                pattern = re.compile(rf"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap.\b{city}\b)")
-                pattern_country = re.compile(rf"(?i)(?:\b{country}\b)")
-                pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
-                submission = reddit.submission(url=url)
-                thread_id = ""
-
+            for i in range(50):
                 try:
-                    if submission.is_self:
-                        if bool(pattern.search(submission.selfpost)):
-                            thread_id = submission.id
-                            r = Rake()
-                            r.extract_keywords_from_text(submission.selfpost)
+                    for url in urls:
+                        print(f"Operating on {url}")
+                        driver.get(url)
+                        driver.find_element_by_name('user').send_keys("OceanLinerXLL")
+                        driver.find_element_by_name('passwd').send_keys("lasvegas")
+                        element_submit_button = driver.find_element_by_class_name('btn')
+                        webdriver.ActionChains(driver).move_to_element(element_submit_button).click(
+                            element_submit_button).perform()
 
-                            country_contains = country if bool(pattern_country.search(submission.selfpost)) else ""
+                        rows = []
 
-                            rows.append(
-                                (True, datetime.datetime.fromtimestamp(submission.created_utc), submission.score,
-                                 submission.permalink, submission.title,
-                                 submission.selfpost, r.get_ranked_phrases()[0], f"{city}, {city_country}",
-                                 country_contains,
-                                 thread_id))
+                        pattern = re.compile(rf"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap.\b{city}\b)")
+                        pattern_country = re.compile(rf"(?i)(?:\b{country}\b)")
+                        pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
+                        submission = reddit.submission(url=url)
+                        thread_id = ""
 
-                            the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
+                        try:
+                            if submission.is_self:
+                                if bool(pattern.search(submission.selfpost)):
+                                    thread_id = submission.id
+                                    r = Rake()
+                                    r.extract_keywords_from_text(submission.selfpost)
 
-                            the_iter = 0
+                                    country_contains = country if bool(pattern_country.search(submission.selfpost)) else ""
 
-                            while True:
-                                i_iter = 0
-                                try:
-                                    for i, comment in enumerate(the_comment[the_iter:]):
-                                        i_iter = i
+                                    rows.append(
+                                        (True, datetime.datetime.fromtimestamp(submission.created_utc), submission.score,
+                                        submission.permalink, submission.title,
+                                        submission.selfpost, r.get_ranked_phrases()[0], f"{city}, {city_country}",
+                                        country_contains,
+                                        thread_id))
 
-                                        tagline = comment.find_element_by_class_name('tagline')
-                                        score = ""
-                                        time_posted = ""
-                                        text = ""
-                                        permalink = ""
+                                    the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
 
+                                    the_iter = 0
+
+                                    while True:
+                                        i_iter = 0
                                         try:
-                                            time_posted = tagline.find_element_by_tag_name('time').get_attribute('title')
-                                        except:
-                                            print("Couldn't get time.")
+                                            for j, comment in enumerate(the_comment[the_iter:]):
+                                                i_iter = j
 
-                                        print("Got time")
-                                        try:
-                                            text = comment.find_element_by_class_name(
-                                                'md').find_element_by_css_selector(
-                                                'p').text
-                                        except:
-                                            print("Couldn't get text")
+                                                tagline = comment.find_element_by_class_name('tagline')
+                                                score = ""
+                                                time_posted = ""
+                                                text = ""
+                                                permalink = ""
 
-                                        print("Got text")
-                                        try:
-                                            score = tagline.find_element_by_css_selector(".score.unvoted").text
-                                        except:
-                                            print("Couldn't get score")
+                                                try:
+                                                    time_posted = tagline.find_element_by_tag_name('time').get_attribute('title')
+                                                except:
+                                                    print("Couldn't get time.")
 
-                                        print("Got score!")
-                                        try:
-                                            permalink = comment.find_element_by_class_name('bylink').get_attribute(
-                                                "href")
-                                        except:
-                                            print("Couldn't get link.")
+                                                print("Got time")
+                                                try:
+                                                    text = comment.find_element_by_class_name(
+                                                    'md').find_element_by_css_selector(
+                                                    'p').text
+                                                except:
+                                                    print("Couldn't get text")
 
-                                        print("Got link!")
+                                                print("Got text")
+                                                try:
+                                                    score = tagline.find_element_by_css_selector(".score.unvoted").text
+                                                except:
+                                                    print("Couldn't get score")
 
-                                        if score and time_posted and text and permalink:
-                                            r = Rake()
-                                            r.extract_keywords_from_text(text)
+                                                print("Got score!")
+                                                try:
+                                                    permalink = comment.find_element_by_class_name('bylink').get_attribute(
+                                                        "href")
+                                                except:
+                                                    print("Couldn't get link.")
 
-                                            country_post = country if bool(pattern_country.search(text)) else ""
-                                            city_post = f"{city}, {city_country}" if bool(pattern_city.search(text)) else ""
+                                                print("Got link!")
 
-                                            rows.append((False, time_posted,
+                                                if score and time_posted and text and permalink:
+                                                    r = Rake()
+                                                    r.extract_keywords_from_text(text)
+
+                                                    country_post = country if bool(pattern_country.search(text)) else ""
+                                                    city_post = f"{city}, {city_country}" if bool(pattern_city.search(text)) else ""
+
+                                                    rows.append((False, time_posted,
                                                          score,
                                                          permalink, "",
                                                          text, r.get_ranked_phrases()[0], city_post,
                                                          country_post,
                                                          thread_id))
-                                except:
-                                    print("Operation expired. Reconnecting...")
-                                    the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
-                                    the_iter = i_iter
-                                    continue
-                                else:
-                                    break
+                                        except:
+                                            print("Operation expired. Reconnecting...")
+                                            the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
+                                            the_iter = i_iter
+                                            continue
+                                        else:
+                                            break
 
 
-                            try:
-                                error = client.insert_rows(
-                                    client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"),
-                                    rows)
+                                    try:
+                                        error = client.insert_rows(
+                                            client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water"),
+                                            rows)
 
-                                if not error:
-                                    print("Rows inserted.")
-                            except:
-                                print("Insert unsuccessful")
-                                continue
+                                        if not error:
+                                            print("Rows inserted.")
+                                    except:
+                                        print("Insert unsuccessful")
+                                        continue
+                        except:
+                            continue
 
                 except:
-                    print("This URL failed. Continuing.")
+                    print('Failed. Retrying.')
                     continue
 
                 del rows, urls, the_result, submission
