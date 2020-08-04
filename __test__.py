@@ -1,27 +1,3 @@
-import praw
-import textwrap
-import re
-import datetime
-from google.cloud import bigquery
-
-
-pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap\b)")
-
-reddit = praw.Reddit(client_id="o-ZP_mKBAwQJRQ",
-                     client_secret="KCfO1wo6DVVfP8zAKVYWOP8KHEQ",
-                     password="lasvegas",
-                     user_agent="Water Safety Grab by /u/OceanLinerXLL",
-                     username="OceanLinerXLL")
-
-submission = reddit.submission(url="https://old.reddit.com/r/paris/comments/cak84x/can_i_drink_tap_water_in_paris/".replace("old", "www"))
-print(f"Got submission with ID {submission.id} with title "
-                                  f"{textwrap.shorten(submission.title, width=30)} with "
-                                  f"keywords {pattern.search(submission.title)} and "
-                                  f"selfpost {textwrap.shorten(submission.selftext, width=30)} with "
-                                  f"keywords {pattern.search(submission.selftext)}")
-
-oo = [(True, str(datetime.datetime(2016, 9, 14, 12, 25, 40)), str(0), '/r/paris/comments/52q7br/eau_potable/', 'Eau potable?', 'Is Paris tap water, say in a hôtel, safe to drink? Or should one buy bottled water?  ', 'one buy bottled water', 'Paris, a', '', '52q7br'), (False, 'Wed Sep 14 12:47:23 2016 UTC', '6 points', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mb62w/', '', 'Yes.', 'yes', '', '', '52q7br'), (False, 'Wed Sep 14 12:49:03 2016 UTC', '4 points', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mb7zh/', '', 'Yes.', 'yes', '', '', '52q7br'), (False, 'Wed Sep 14 13:11:19 2016 UTC', '4 points', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mbxhu/', '', 'Yes.', 'yes', '', '', '52q7br'), (False, 'Wed Sep 14 13:40:00 2016 UTC', '2 points', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mcypn/', '', 'Well, can you drink tap water in London, Berlin, Madrid, New York, Singapore, Tokyo... ?', 'drink tap water', '', '', '52q7br'), (False, 'Wed Sep 14 15:37:57 2016 UTC', '3 points', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mi054/', '', "You can't in Rio, Mexico city, Kuala Lumpur, and many other capitals in the world. It's not an odd thing to ask if you've traveled a bit or if you come from a country where tap water isn't safe", 'tap water', '', '', '52q7br'), (False, 'Wed Sep 14 19:07:44 2016 UTC', '3 points', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7ms63b/', '', "I've traveled a lot and I asked this question a few times but Paris, I mean... I'm not mocking the question, just the context where Paris would have non drinkable tap water for some reason. In Casablance where I have family, I know i can't drink it, in the small fisherman village in Catalunya near the sea, I know I can't drink water (well we can nowadays) so in the context... Paris is what you call a Global City (or Ville mondiale in french) you usually can drink because it represent the highest development possible. That's all, carry on.", 'non drinkable tap water', 'Paris, a', '', '52q7br'), (False, 'Wed Sep 14 16:48:22 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mlcri/', '', "I don't know any major city in a developed country where you can't drink tap water.", 'drink tap water', '', '', '52q7br'), (False, 'Wed Sep 14 18:01:22 2016 UTC', '2 points', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mown1/', '', 'Flint, Michigan, Beijing, Mexico City, Moscow, St. Petersburg.', 'mexico city', '', '', '52q7br'), (False, 'Fri Sep 23 16:05:52 2016 UTC', '2 points', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7yzzvg/', '', 'More accurately, if you cant drink tap water, the place is NOT developped.', 'cant drink tap water', '', '', '52q7br'), (False, 'Wed Sep 14 18:38:46 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mqq46/', '', 'Is Las vegas enough developed country for you ?', 'las vegas enough developed country', '', '', '52q7br'), (False, 'Wed Sep 14 13:51:33 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mdeh1/', '', 'Yes, Parisian water is perfectly safe. You may be used to a particular taste from where you are from but tap water in hotels, restaurants, and even the Wallace Fountains are safe.', 'wallace fountains', '', '', '52q7br'), (False, 'Wed Sep 14 15:34:22 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mhu6m/', '', 'Yes', 'yes', '', '', '52q7br'), (False, 'Wed Sep 14 19:23:54 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7msz9j/', '', 'Thank you everyone for your answers. I thought it improbable that tap water would not be safe, but an article in the Finnish press this morning told of a medical doctor who professed not to trust any tap water! I thought I would check your better knowledge.', 'tap water would', '', '', '52q7br'), (False, 'Sun Sep 18 15:32:40 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7ruaej/', '', 'They have potable water spigots all over the city too. Totally safe, and delicious. A million times better than LA water :)', 'potable water spigots', '', '', '52q7br'), (False, 'Sun Sep 18 15:38:54 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7ruj2u/', '', "Excellent! I'll try some out on Wednesday.", 'wednesday', '', '', '52q7br'), (False, 'Thu Sep 15 06:35:24 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7nipas/', '', 'Of course !', 'course', '', '', '52q7br'), (False, 'Thu Sep 15 14:54:50 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7nuwqq/', '', 'Oui', 'oui', '', '', '52q7br'), (False, 'Wed Sep 14 13:26:07 2016 UTC', '1 point', 'https://old.reddit.com/r/paris/comments/52q7br/eau_potable/d7mcg7i/', '', 'Yes and no.', 'yes', '', '', '52q7br')]
-
-client = bigquery.Client.from_service_account_json('client_secrets.json')
-
-print(len(oo))
+g = None
+country = "ff"
+print("" if g is None else country)
