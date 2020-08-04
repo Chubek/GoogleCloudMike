@@ -74,12 +74,18 @@ def get_google_reddit_tap_water():
 
     query_num = 0
     row_num = 0
-    for city_, country in itertools.zip_longest(cities[1:], countries[1:]):
+    for city_, country in itertools.zip_longest(cities[200:], countries[150:]):
         city = city_[0]
         city_country = city_[1]
 
-        country = country[0]
-        query = f"tap AND water AND ({city} OR {'' if country is None else country})"
+        country = ""
+
+        try:
+            country = country[0]
+        except:
+            print("Country is None")
+
+        query = f"tap AND water AND ({city} OR {country})"
         print(f"Searching for {query}. Query number: {query_num}")
 
         the_result = None
