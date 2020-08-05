@@ -165,6 +165,7 @@ def get_google_reddit_tap_water():
                         if not error:
                             print(f"Row number {row_num} inserted")
                             row_num += 1
+                            del submission
                         else:
                             print(error)
                     except:
@@ -256,7 +257,7 @@ def get_google_reddit_tap_water():
                                     print(error)
 
                                 del time_posted, text, score, permalink, country_post, row, thread_id, \
-                                    city_post, r, error, query, submission
+                                    city_post, r, error, query
 
 
                         except:
