@@ -19,6 +19,7 @@ import datetime
 import os
 import textwrap
 import itertools
+import requests
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -92,7 +93,6 @@ def get_google_reddit_tap_water():
 
         the_result = None
 
-
         try:
             the_result = service.cse().list(q=query, cx=SEARCH_ENGINE_ID).execute()
             query_num += 1
@@ -100,14 +100,13 @@ def get_google_reddit_tap_water():
             print(f"Skipping {city} and {country}")
             continue
 
-
         urls = []
         url_pattern = re.compile(
             r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)")
         try:
             for item in the_result.get("items"):
                 url = item.get("link").replace("www", "old")
-                if bool(url_pattern.search(url)):
+                if bool(url_pattern.search(url)) and requests.get(url).status_code == 200:
                     urls.append(url)
                     print(f"url {url} added")
         except:
@@ -170,6 +169,15 @@ def get_google_reddit_tap_water():
                     continue
 
                 try:
+
+                    if url.split("/")[-1] == "window":
+                        print(f"{url} contains window at the end. Continuing.")
+                        continue
+
+                    if requests.get(url).status_code != 200:
+                        continue
+
+                    print(f"dirver getting {url}")
                     driver.get(url)
                     the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
                     print(f"found {len(the_comment)} comments.")
