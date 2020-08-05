@@ -73,17 +73,17 @@ def get_google_reddit_tap_water():
                          user_agent="Water Safety Grab by /u/OceanLinerXLL",
                          username="OceanLinerXLL")
 
-    query_num = 0
+    query_num = 294
     row_num = 0
-    for city_ in cities[1:]:
+    for city_ in cities[294:]:
         city = city_[0]
         city_country = city_[1]
         country = city_country
 
         if query_num % 5 == 0:
-            time.sleep(25)
-        elif query_num % 20 == 0:
-            time.sleep(45)
+            time.sleep(26)
+        elif query_num % 8 == 0:
+            time.sleep(50)
 
         query = f"tap AND water AND ({city} OR {city_country})"
         print(f"Searching for {query}. Query number: {query_num}")
@@ -164,7 +164,6 @@ def get_google_reddit_tap_water():
                 except:
                     print('Submission get failed. Retrying.')
                     continue
-
                 try:
                     print(f"dirver getting {url}")
                     driver.get(url)
