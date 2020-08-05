@@ -11,8 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9a0449c-363b-40e0-ae9d-f89caaa9b2a6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignote" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GoogleReddit.py" beforeDir="false" afterPath="$PROJECT_DIR$/GoogleReddit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/__test__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__test__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -235,6 +235,8 @@
       <workItem from="1596371102487" duration="850000" />
       <workItem from="1596400084158" duration="14000" />
       <workItem from="1596454882963" duration="31798000" />
+      <workItem from="1596542910556" duration="2463000" />
+      <workItem from="1596548307852" duration="8212000" />
     </task>
     <servers />
   </component>
@@ -330,7 +332,7 @@
     <SUITE FILE_PATH="coverage/GA2GBQ$RedditScrape.coverage" NAME="RedditScrape Coverage Results" MODIFIED="1595949030105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA2GBQ$SubredditList.coverage" NAME="SubredditList Coverage Results" MODIFIED="1595938828189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA2GBQ$GA2GBQ.coverage" NAME="GA2GBQ Coverage Results" MODIFIED="1595418436714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/GA2GBQ$__test__.coverage" NAME="__test__ Coverage Results" MODIFIED="1596507352758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA2GBQ$__test__.coverage" NAME="__test__ Coverage Results" MODIFIED="1596593937226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA2GBQ$GoogleReddit.coverage" NAME="GoogleReddit Coverage Results" MODIFIED="1596326084698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA2GBQ$ApmaScrape.coverage" NAME="ApmaScrape Coverage Results" MODIFIED="1595690910494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA2GBQ$LeverCompanies.coverage" NAME="LeverCompanies Coverage Results" MODIFIED="1595857928523" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
