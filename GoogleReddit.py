@@ -74,7 +74,7 @@ def get_google_reddit_tap_water():
 
     query_num = 0
     row_num = 0
-    for city_, country in itertools.zip_longest(cities[200:], countries[150:]):
+    for city_, country in itertools.zip_longest(cities[50:], countries[150:]):
         city = city_[0]
         city_country = city_[1]
 
@@ -101,15 +101,18 @@ def get_google_reddit_tap_water():
                 continue
 
         urls = []
-
+        url_pattern = re.compile(r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)")
         try:
             for item in the_result.get("items"):
-                urls.append(item.get("link").replace("www", "old"))
+                url = item.get("link").replace("www", "old")
+                if bool(url_pattern.search(url)):
+                    urls.append(url)
+                    print(f"url {url} added")
         except:
             print("No items.")
             continue
 
-        for i in range(50):
+        for i in range(10):
             try:
                 for url in urls:
                     print(f"Operating on {url}")
@@ -117,18 +120,11 @@ def get_google_reddit_tap_water():
 
                     print(f"Page title: {driver.title}")
 
-                    pattern = re.compile(r"(?i)(?:\btap\b.*\bwater\b|\bwater\b.*\btap\b)")
                     pattern_country = re.compile(rf"(?i)(?:\b{country}\b)")
                     pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
 
                     try:
                         submission = reddit.submission(url=url.replace("old", "www"))
-                        print(f"Got submission with ID {submission.id} with title "
-                              f"{textwrap.shorten(submission.title, width=10)} with "
-                              f"keywords {pattern.search(submission.title)} and "
-                              f"selftext {textwrap.shorten(submission.selftext, width=20)} with "
-                              f"keywords {pattern.search(submission.selftext)}")
-
                         thread_id = submission.id
                         key_phrase = ""
 
@@ -272,10 +268,12 @@ def get_google_reddit_tap_water():
             except:
                 print("Url get failed. Continuing")
                 continue
+            else:
+                break
 
-            del urls, the_result, submission
+        del urls, the_result, submission
 
-            print("This done.")
+        print("This done.")
 
         driver.close()
         driver.quit()
