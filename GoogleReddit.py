@@ -98,11 +98,10 @@ def get_google_reddit_tap_water():
             continue
 
         urls = []
-        url_pattern = re.compile(r"\bsession\b|\bwindow\b")
         try:
             for item in the_result.get("items"):
-                url = item.get("link").replace("www", "old").replace("https", "http")
-                if not bool(url_pattern.search(url)):
+                url = item.get("link").replace("www", "old")
+                if url.split("/")[-4] == "comments":
                     urls.append(url)
                     print(f"url {url} added")
         except:
@@ -118,7 +117,10 @@ def get_google_reddit_tap_water():
                 pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
 
                 try:
-                    submission = reddit.submission(url=url.replace("old", "www"))
+
+                    id_ = url.split("/")[-3]
+
+                    submission = reddit.submission(id=id_)
                     thread_id = submission.id
                     key_phrase = ""
 
@@ -165,8 +167,9 @@ def get_google_reddit_tap_water():
                     print('Submission get failed. Retrying.')
                     continue
                 try:
-                    print(f"dirver getting {url}")
-                    driver.get(url)
+                    print(f"dirver getting {url.replace('https:', 'http:')}")
+                    driver.get(url.replace("https:", "http:"))
+                    print(f"Got page {driver.title}")
                     the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
                     print(f"found {len(the_comment)} comments.")
                     the_iter = 0
@@ -239,7 +242,7 @@ def get_google_reddit_tap_water():
                                         permalink, "",
                                         text, key_phrase, city_post,
                                         country_post,
-                                        "", query)]
+                                        url.split("/")[-3], query)]
 
                                 print(f"inner row {row}")
 

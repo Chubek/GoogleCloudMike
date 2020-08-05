@@ -13,4 +13,4 @@ urls = []
 for item in the_result.get("items"):
     urls.append(item.get("link").replace("www", "old"))
 
-print(the_result)
+print("http://old.reddit.com/r/japanlife/comments/502eww/water_filterpurifier/".split("/")[-4])
