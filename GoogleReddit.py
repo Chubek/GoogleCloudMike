@@ -46,7 +46,7 @@ def get_google_reddit_tap_water():
     cities = cities_sheet.get_all_values()
     countries = countries_sheet.get_all_values()
     client = bigquery.Client.from_service_account_json('client_secrets.json')
-    table = client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water")
+    table = client.get_table("cydtw-site.reddit_tap_water.reddit_google_threads")
     SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
     API_KEY = "AIzaSyBLU4mPXHy61FcYdcpHFS_RDQ3rR4lNT_E"
     GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
@@ -78,11 +78,12 @@ def get_google_reddit_tap_water():
     for city_ in cities[1:]:
         city = city_[0]
         city_country = city_[1]
+        country = city_country
 
         if query_num % 5 == 0:
             time.sleep(25)
         elif query_num % 20 == 0:
-            time.sleep(45ple)
+            time.sleep(45)
 
         query = f"tap AND water AND ({city} OR {city_country})"
         print(f"Searching for {query}. Query number: {query_num}")
