@@ -2,7 +2,7 @@ from googleapiclient.discovery import build
 
 
 SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
-API_KEY = "AIzaSyCjuHRi_hJDXGBsGKSO4nTaz5k4EQ4K1WI"
+API_KEY = "AIzaSyANjD56fSSSu8kc3YRWkW1OV6QyR9ZFwVA"
 
 service = build("customsearch", "v1", developerKey=API_KEY)
 

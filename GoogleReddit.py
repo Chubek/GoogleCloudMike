@@ -47,7 +47,7 @@ def get_google_reddit_tap_water():
     client = bigquery.Client.from_service_account_json('client_secrets.json')
     table = client.get_table("cydtw-site.reddit_tap_water.reddit_google_tap_water")
     SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
-    API_KEY = "AIzaSyCjuHRi_hJDXGBsGKSO4nTaz5k4EQ4K1WI"
+    API_KEY = "AIzaSyANjD56fSSSu8kc3YRWkW1OV6QyR9ZFwVA"
     GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
     CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
@@ -128,150 +128,147 @@ def get_google_reddit_tap_water():
                               f"keywords {pattern.search(submission.title)} and "
                               f"selftext {textwrap.shorten(submission.selftext, width=20)} with "
                               f"keywords {pattern.search(submission.selftext)}")
-                        if bool(pattern.search(submission.selftext)) or bool(pattern.search(submission.title)):
-                            print("Submission contains the keywords.")
-                            thread_id = submission.id
-                            key_phrase = ""
 
+                        thread_id = submission.id
+                        key_phrase = ""
+
+                        try:
+                            r = Rake()
+                            r.extract_keywords_from_text(submission.selftext)
+                            key_phrase = r.get_ranked_phrases()[0]
+                            print(f"keyphrase is {key_phrase}")
+                        except:
+                            print("Error getting keyphrase")
+
+                        country_contains = ""
+                        city_contains = ""
+
+                        try:
+                            country_contains = country if bool(
+                                pattern_country.search(submission.selftext)) else ""
+                            city_contains = f"{city}, {city_country}" if bool(
+                                pattern_city.search(submission.selftext)) else ""
+                        except:
+                            print("Failed getting city and country contains")
+
+                        print(f"City contains {city_contains} and country contains {country_contains}")
+
+                        row = [
+                            (
+                                True, str(datetime.datetime.fromtimestamp(submission.created_utc)),
+                                str(submission.score),
+                                submission.permalink, submission.title,
+                                submission.selftext, key_phrase, city_contains,
+                                country_contains,
+                                thread_id, query)]
+
+                        print(f"row is {row}")
+
+                        error = client.insert_rows(table, row)
+                        if not error:
+                            print(f"Row number {row_num} inserted")
+                            row_num += 1
+                        else:
+                            print(error)
+
+                        the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
+                        print(f"found {len(the_comment)} comments.")
+                        the_iter = 0
+
+                        for n in range(submission.num_comments):
+                            i_iter = 0
                             try:
-                                r = Rake()
-                                r.extract_keywords_from_text(submission.selftext)
-                                key_phrase = r.get_ranked_phrases()[0]
-                                print(f"keyphrase is {key_phrase}")
+                                for j, comment in enumerate(the_comment[the_iter:]):
+                                    i_iter = j
+
+                                    tagline = comment.find_element_by_class_name('tagline')
+                                    score = ""
+                                    time_posted = ""
+                                    text = ""
+                                    permalink = ""
+
+                                    try:
+                                        time_posted = tagline.find_element_by_tag_name(
+                                            'time').get_attribute('title')
+                                    except:
+                                        print("Couldn't get time.")
+
+                                    print(f"Got time {time_posted}")
+                                    try:
+                                        text = comment.find_element_by_class_name(
+                                            'md').find_element_by_css_selector(
+                                            'p').text
+                                    except:
+                                        print("Couldn't get text")
+
+                                    print(f"Got text {textwrap.shorten(text, width=20)}")
+
+                                    try:
+                                        score = tagline.find_element_by_css_selector(".score.unvoted").text
+                                    except:
+                                        print("Couldn't get score")
+
+                                    print(f"Got score {score}")
+                                    try:
+                                        permalink = comment.find_element_by_class_name(
+                                            'bylink').get_attribute(
+                                            "href")
+                                    except:
+                                        print("Couldn't get link.")
+
+                                    print(f"Got link {permalink}")
+
+                                    key_phrase = ""
+
+                                    try:
+                                        r = Rake()
+                                        r.extract_keywords_from_text(text)
+                                        key_phrase = r.get_ranked_phrases()[0]
+                                        print(f"keyphrase {key_phrase}")
+                                    except:
+                                        print("Error getting keyphrase")
+
+                                    country_post = ""
+                                    city_post = ""
+
+                                    try:
+                                        country_post = country if bool(pattern_country.search(text)) else ""
+                                        city_post = f"{city}, {city_country}" if bool(
+                                            pattern_city.search(text)) else ""
+                                    except:
+                                        print("Error getting city and country for post")
+
+                                    row = [(False, time_posted,
+                                            score,
+                                            permalink, "",
+                                            text, key_phrase, city_post,
+                                            country_post,
+                                            thread_id, query)]
+
+                                    print(f"inner row {row}")
+
+                                    error = client.insert_rows(table, row)
+
+                                    if not error:
+                                        print(f"Row number {row_num} inserted.")
+                                        row_num += 1
+                                    else:
+                                        print(error)
+
+                                    del time_posted, text, score, permalink, country_post, row, thread_id, \
+                                        city_post, r, error, query
+
                             except:
-                                print("Error getting keyphrase")
-
-                            country_contains = ""
-                            city_contains = ""
-
-                            try:
-                                country_contains = country if bool(
-                                    pattern_country.search(submission.selftext)) else ""
-                                city_contains = f"{city}, {city_country}" if bool(
-                                    pattern_city.search(submission.selftext)) else ""
-                            except:
-                                print("Failed getting city and country contains")
-
-                            print(f"City contains {city_contains} and country contains {country_contains}")
-
-                            row = [
-                                (
-                                    True, str(datetime.datetime.fromtimestamp(submission.created_utc)),
-                                    str(submission.score),
-                                    submission.permalink, submission.title,
-                                    submission.selftext, key_phrase, city_contains,
-                                    country_contains,
-                                    thread_id, query)]
-
-                            print(f"row is {row}")
-
-                            error = client.insert_rows(table, row)
-                            if not error:
-                                print(f"Row number {row_num} inserted")
-                                row_num += 1
+                                print(f"Operation expired. Reconnecting for {n}/{submission.num_comments}")
+                                the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
+                                the_iter = i_iter
+                                continue
                             else:
-                                print(error)
-
-                            the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
-                            print(f"found {len(the_comment)} comments.")
-                            the_iter = 0
-
-                            for n in range(submission.num_comments):
-                                i_iter = 0
-                                try:
-                                    for j, comment in enumerate(the_comment[the_iter:]):
-                                        i_iter = j
-
-                                        tagline = comment.find_element_by_class_name('tagline')
-                                        score = ""
-                                        time_posted = ""
-                                        text = ""
-                                        permalink = ""
-
-                                        try:
-                                            time_posted = tagline.find_element_by_tag_name(
-                                                'time').get_attribute('title')
-                                        except:
-                                            print("Couldn't get time.")
-
-                                        print(f"Got time {time_posted}")
-                                        try:
-                                            text = comment.find_element_by_class_name(
-                                                'md').find_element_by_css_selector(
-                                                'p').text
-                                        except:
-                                            print("Couldn't get text")
-
-                                        print(f"Got text {textwrap.shorten(text, width=20)}")
-
-                                        try:
-                                            score = tagline.find_element_by_css_selector(".score.unvoted").text
-                                        except:
-                                            print("Couldn't get score")
-
-                                        print(f"Got score {score}")
-                                        try:
-                                            permalink = comment.find_element_by_class_name(
-                                                'bylink').get_attribute(
-                                                "href")
-                                        except:
-                                            print("Couldn't get link.")
-
-                                        print(f"Got link {permalink}")
-
-                                        if bool(pattern.match(text)):
-                                            print("Got matching text")
-
-                                            key_phrase = ""
-
-                                            try:
-                                                r = Rake()
-                                                r.extract_keywords_from_text(text)
-                                                key_phrase = r.get_ranked_phrases()[0]
-                                                print(f"keyphrase {key_phrase}")
-                                            except:
-                                                print("Error getting keyphrase")
-
-                                            country_post = ""
-                                            city_post = ""
-
-                                            try:
-                                                country_post = country if bool(pattern_country.search(text)) else ""
-                                                city_post = f"{city}, {city_country}" if bool(
-                                                    pattern_city.search(text)) else ""
-                                            except:
-                                                print("Error getting city and country for post")
-
-                                            row = [(False, time_posted,
-                                                    score,
-                                                    permalink, "",
-                                                    text, key_phrase, city_post,
-                                                    country_post,
-                                                    thread_id, query)]
-
-                                            print(f"inner row {row}")
-
-                                            error = client.insert_rows(table, row)
-
-                                            if not error:
-                                                print(f"Row number {row_num} inserted.")
-                                                row_num += 1
-                                            else:
-                                                print(error)
-
-                                            del time_posted, text, score, permalink, country_post, row, thread_id, \
-                                                city_post, r, error, query
-
-                                except:
-                                    print(f"Operation expired. Reconnecting for {n}/{submission.num_comments}")
-                                    the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
-                                    the_iter = i_iter
-                                    continue
-                                else:
-                                    break
+                                break
                     except:
                         print('Submission get failed. Retrying.')
                         continue
+
             except:
                 print("Url get failed. Continuing")
                 continue
@@ -280,9 +277,8 @@ def get_google_reddit_tap_water():
 
             print("This done.")
 
-    driver.close()
-    driver.quit()
-
+        driver.close()
+        driver.quit()
 
 if __name__ == "__main__":
     get_google_reddit_tap_water()
