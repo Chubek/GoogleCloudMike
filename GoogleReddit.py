@@ -75,20 +75,11 @@ def get_google_reddit_tap_water():
 
     query_num = 0
     row_num = 0
-    for city_, country in itertools.zip_longest(cities[1:], countries[1:]):
+    for city_, country in cities[1:]:
         city = city_[0]
         city_country = city_[1]
 
-        country = ""
-        OR = ""
-
-        try:
-            country = country[0]
-            OR = "OR"
-        except:
-            print("Country is None")
-
-        query = f"tap AND water AND ({city} {OR} {country})"
+        query = f"tap AND water AND ({city} OR {city_country})"
         print(f"Searching for {query}. Query number: {query_num}")
 
         the_result = None
@@ -101,12 +92,11 @@ def get_google_reddit_tap_water():
             continue
 
         urls = []
-        url_pattern = re.compile(
-            r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)")
+        url_pattern = re.compile(r"\bsession\b|\bwindow\b")
         try:
             for item in the_result.get("items"):
                 url = item.get("link").replace("www", "old")
-                if bool(url_pattern.search(url)) and requests.get(url).status_code == 200:
+                if not bool(url_pattern.search(url)):
                     urls.append(url)
                     print(f"url {url} added")
         except:
@@ -116,6 +106,14 @@ def get_google_reddit_tap_water():
         try:
             for url in urls:
                 print(f"Operating on {url}")
+
+                try:
+                    r = requests.get(url)
+                    if r.status_code != 200:
+                        continue
+                except requests.exceptions.ConnectionError:
+                    print("Connection error")
+                    continue
 
                 pattern_country = re.compile(rf"(?i)(?:\b{country}\b)")
                 pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
@@ -169,14 +167,6 @@ def get_google_reddit_tap_water():
                     continue
 
                 try:
-
-                    if url.split("/")[-1] == "window":
-                        print(f"{url} contains window at the end. Continuing.")
-                        continue
-
-                    if requests.get(url).status_code != 200:
-                        continue
-
                     print(f"dirver getting {url}")
                     driver.get(url)
                     the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
@@ -274,8 +264,8 @@ def get_google_reddit_tap_water():
                             continue
                         else:
                             break
-                except:
-                    print("Driver failed to get url.")
+                except requests.exceptions.ConnectionError:
+                    print(f"Driver failed to get url")
                     continue
         except:
             print("Url get failed. Continuing")
