@@ -260,11 +260,8 @@ def get_google_reddit_tap_water():
             print("This url failed")
             continue
 
-
-
-
-driver.close()
-driver.quit()
+    driver.close()
+    driver.quit()
 
 if __name__ == "__main__":
     get_google_reddit_tap_water()
