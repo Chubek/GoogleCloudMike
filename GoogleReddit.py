@@ -101,7 +101,7 @@ def get_google_reddit_tap_water():
         url_pattern = re.compile(r"\bsession\b|\bwindow\b")
         try:
             for item in the_result.get("items"):
-                url = item.get("link").replace("www", "old")
+                url = item.get("link").replace("www", "old").replace("https", "http")
                 if not bool(url_pattern.search(url)):
                     urls.append(url)
                     print(f"url {url} added")
