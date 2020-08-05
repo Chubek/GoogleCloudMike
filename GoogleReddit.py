@@ -73,9 +73,9 @@ def get_google_reddit_tap_water():
                          user_agent="Water Safety Grab by /u/OceanLinerXLL",
                          username="OceanLinerXLL")
 
-    query_num = 297
+    query_num = 13
     row_num = 0
-    for city_ in cities[1:]:
+    for city_ in cities[13:]:
         city = city_[0]
         city_country = city_[1]
         country = city_country
@@ -158,6 +158,8 @@ def get_google_reddit_tap_water():
                         print(f"Row number {row_num} inserted")
                         row_num += 1
                         del submission
+                        del row
+                        del error
                     else:
                         print(error)
                 except:
@@ -244,10 +246,13 @@ def get_google_reddit_tap_water():
                             if not error:
                                 print(f"Row number {row_num} inserted.")
                                 row_num += 1
+                                del row
+                                del error
                             else:
                                 print(error)
 
-                            del time_posted, text, score, permalink, country_post, row, thread_id, \
+                            del time_posted, tagline, the_comment, the_result, text, score, permalink, country_post,\
+                                row, thread_id, \
                                 city_post, r, error, query
                     except:
                         print("Scrape failed.")
@@ -259,7 +264,7 @@ def get_google_reddit_tap_water():
         except:
             print("This url failed")
             continue
-
+        del urls
     driver.close()
     driver.quit()
 
