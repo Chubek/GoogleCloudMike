@@ -260,13 +260,12 @@ def get_google_reddit_tap_water():
               #  except requests.exceptions.ConnectionError:
                #     print(f"Driver failed to get url")
                 #    continue
-        #except:
-         #   print("Url get failed. Continuing")
-          #  continue
+        except:
+            print("Url get failed. Continuing")
+            continue
         #else:
          #   print(f"successful")
 
-        print("This done.")
 
         driver.close()
         driver.quit()
