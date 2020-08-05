@@ -11,6 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9a0449c-363b-40e0-ae9d-f89caaa9b2a6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GoogleReddit.py" beforeDir="false" afterPath="$PROJECT_DIR$/GoogleReddit.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -234,7 +235,7 @@
       <workItem from="1596400084158" duration="14000" />
       <workItem from="1596454882963" duration="31798000" />
       <workItem from="1596542910556" duration="2463000" />
-      <workItem from="1596548307852" duration="12014000" />
+      <workItem from="1596548307852" duration="13750000" />
     </task>
     <servers />
   </component>
@@ -324,27 +325,6 @@
     </state>
     <state x="2544" y="162" width="672" height="676" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.985/3840.0.1920.1080@1920.0.1920.1080" timestamp="1596097946479" />
     <state x="2544" y="162" width="670" height="676" key="search.everywhere.popup/1920.0.1920.1080/3840.109.1920.1080/0.27.1920.985@1920.0.1920.1080" timestamp="1595407595500" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/GoogleReddit.py</url>
-          <line>116</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/GoogleReddit.py</url>
-          <line>114</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/GoogleReddit.py</url>
-          <line>93</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/GA2GBQ$__test__new.coverage" NAME="__test__new Coverage Results" MODIFIED="1596100712069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

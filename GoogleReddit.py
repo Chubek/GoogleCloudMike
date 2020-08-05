@@ -113,65 +113,65 @@ def get_google_reddit_tap_water():
             print("No items.")
             continue
 
-        for i in range(10):
-            try:
-                for url in urls:
-                    print(f"Operating on {url}")
-                    driver.get(url)
+        try:
+            for url in urls:
+                print(f"Operating on {url}")
 
-                    print(f"Page title: {driver.title}")
+                print(f"Page title: {driver.title}")
 
-                    pattern_country = re.compile(rf"(?i)(?:\b{country}\b)")
-                    pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
+                pattern_country = re.compile(rf"(?i)(?:\b{country}\b)")
+                pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
+
+                try:
+                    submission = reddit.submission(url=url.replace("old", "www"))
+                    thread_id = submission.id
+                    key_phrase = ""
 
                     try:
-                        submission = reddit.submission(url=url.replace("old", "www"))
-                        thread_id = submission.id
-                        key_phrase = ""
-
-                        try:
-                            r = Rake()
-                            r.extract_keywords_from_text(submission.selftext)
-                            key_phrase = r.get_ranked_phrases()[0]
-                            print(f"keyphrase is {key_phrase}")
-                        except:
-                            print("Error getting keyphrase")
-
-                        country_contains = ""
-                        city_contains = ""
-
-                        try:
-                            country_contains = country if bool(
-                                pattern_country.search(submission.selftext)) else ""
-                            city_contains = f"{city}, {city_country}" if bool(
-                                pattern_city.search(submission.selftext)) else ""
-                        except:
-                            print("Failed getting city and country contains")
-
-                        print(f"City contains {city_contains} and country contains {country_contains}")
-
-                        row = [
-                            (
-                                True, str(datetime.datetime.fromtimestamp(submission.created_utc)),
-                                str(submission.score),
-                                submission.permalink, submission.title,
-                                submission.selftext, key_phrase, city_contains,
-                                country_contains,
-                                thread_id, query)]
-
-                        print(f"row is {row}")
-
-                        error = client.insert_rows(table, row)
-                        if not error:
-                            print(f"Row number {row_num} inserted")
-                            row_num += 1
-                            del submission
-                        else:
-                            print(error)
+                        r = Rake()
+                        r.extract_keywords_from_text(submission.selftext)
+                        key_phrase = r.get_ranked_phrases()[0]
+                        print(f"keyphrase is {key_phrase}")
                     except:
-                        print('Submission get failed. Retrying.')
-                        continue
+                        print("Error getting keyphrase")
 
+                    country_contains = ""
+                    city_contains = ""
+
+                    try:
+                        country_contains = country if bool(
+                            pattern_country.search(submission.selftext)) else ""
+                        city_contains = f"{city}, {city_country}" if bool(
+                            pattern_city.search(submission.selftext)) else ""
+                    except:
+                        print("Failed getting city and country contains")
+
+                    print(f"City contains {city_contains} and country contains {country_contains}")
+
+                    row = [
+                        (
+                            True, str(datetime.datetime.fromtimestamp(submission.created_utc)),
+                            str(submission.score),
+                            submission.permalink, submission.title,
+                            submission.selftext, key_phrase, city_contains,
+                            country_contains,
+                            thread_id, query)]
+
+                    print(f"row is {row}")
+
+                    error = client.insert_rows(table, row)
+                    if not error:
+                        print(f"Row number {row_num} inserted")
+                        row_num += 1
+                        del submission
+                    else:
+                        print(error)
+                except:
+                    print('Submission get failed. Retrying.')
+                    continue
+
+                try:
+                    driver.get(url)
                     the_comment = driver.find_elements_by_css_selector(".entry.unvoted")
                     print(f"found {len(the_comment)} comments.")
                     the_iter = 0
@@ -190,15 +190,15 @@ def get_google_reddit_tap_water():
 
                                 try:
                                     time_posted = tagline.find_element_by_tag_name(
-                                        'time').get_attribute('title')
+                                    'time').get_attribute('title')
                                 except:
                                     print("Couldn't get time.")
                                 else:
                                     print(f"Got time {time_posted}")
                                 try:
                                     text = comment.find_element_by_class_name(
-                                        'md').find_element_by_css_selector(
-                                        'p').text
+                                    'md').find_element_by_css_selector(
+                                    'p').text
                                 except:
                                     print("Couldn't get text")
                                 else:
@@ -212,8 +212,8 @@ def get_google_reddit_tap_water():
                                     print(f"Got score {score}")
                                 try:
                                     permalink = comment.find_element_by_class_name(
-                                        'bylink').get_attribute(
-                                        "href")
+                                    'bylink').get_attribute(
+                                    "href")
                                 except:
                                     print("Couldn't get link.")
                                 else:
@@ -235,16 +235,16 @@ def get_google_reddit_tap_water():
                                 try:
                                     country_post = country if bool(pattern_country.search(text)) else ""
                                     city_post = f"{city}, {city_country}" if bool(
-                                        pattern_city.search(text)) else ""
+                                    pattern_city.search(text)) else ""
                                 except:
                                     print("Error getting city and country for post")
 
                                 row = [(False, time_posted,
-                                        score,
-                                        permalink, "",
-                                        text, key_phrase, city_post,
-                                        country_post,
-                                        "", query)]
+                                    score,
+                                    permalink, "",
+                                    text, key_phrase, city_post,
+                                    country_post,
+                                    "", query)]
 
                                 print(f"inner row {row}")
 
@@ -267,15 +267,14 @@ def get_google_reddit_tap_water():
                             continue
                         else:
                             break
-
-
-
-
-            except:
-                print("Url get failed. Continuing")
-                continue
-            else:
-                break
+                except:
+                    print("Driver failed to get url.")
+                    continue
+        except:
+            print("Url get failed. Continuing")
+            continue
+        else:
+            print(f"successful")
 
         print("This done.")
 
