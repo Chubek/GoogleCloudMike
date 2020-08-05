@@ -74,31 +74,32 @@ def get_google_reddit_tap_water():
 
     query_num = 0
     row_num = 0
-    for city_, country in itertools.zip_longest(cities[50:], countries[150:]):
+    for city_, country in itertools.zip_longest(cities[1:], countries[1:]):
         city = city_[0]
         city_country = city_[1]
 
         country = ""
+        OR = ""
 
         try:
             country = country[0]
+            OR = "OR"
         except:
             print("Country is None")
 
-        query = f"tap AND water AND ({city} OR {country})"
+        query = f"tap AND water AND ({city} {OR} {country})"
         print(f"Searching for {query}. Query number: {query_num}")
 
         the_result = None
 
-        for i in range(20):
-            try:
-                the_result = service.cse().list(q=query, cx=SEARCH_ENGINE_ID).execute()
-                query_num += 1
-            except:
-                print(f"Search failed. Retrying {i}/20")
-            else:
-                print(f"Skipping {city} and {country}")
-                continue
+
+        try:
+            the_result = service.cse().list(q=query, cx=SEARCH_ENGINE_ID).execute()
+            query_num += 1
+        except:
+            print(f"Skipping {city} and {country}")
+            continue
+
 
         urls = []
         url_pattern = re.compile(
@@ -116,8 +117,6 @@ def get_google_reddit_tap_water():
         try:
             for url in urls:
                 print(f"Operating on {url}")
-
-                print(f"Page title: {driver.title}")
 
                 pattern_country = re.compile(rf"(?i)(?:\b{country}\b)")
                 pattern_city = re.compile(rf"(?i)(?:\b{city}\b)")
@@ -190,15 +189,15 @@ def get_google_reddit_tap_water():
 
                                 try:
                                     time_posted = tagline.find_element_by_tag_name(
-                                    'time').get_attribute('title')
+                                        'time').get_attribute('title')
                                 except:
                                     print("Couldn't get time.")
                                 else:
                                     print(f"Got time {time_posted}")
                                 try:
                                     text = comment.find_element_by_class_name(
-                                    'md').find_element_by_css_selector(
-                                    'p').text
+                                        'md').find_element_by_css_selector(
+                                        'p').text
                                 except:
                                     print("Couldn't get text")
                                 else:
@@ -212,8 +211,8 @@ def get_google_reddit_tap_water():
                                     print(f"Got score {score}")
                                 try:
                                     permalink = comment.find_element_by_class_name(
-                                    'bylink').get_attribute(
-                                    "href")
+                                        'bylink').get_attribute(
+                                        "href")
                                 except:
                                     print("Couldn't get link.")
                                 else:
@@ -235,16 +234,16 @@ def get_google_reddit_tap_water():
                                 try:
                                     country_post = country if bool(pattern_country.search(text)) else ""
                                     city_post = f"{city}, {city_country}" if bool(
-                                    pattern_city.search(text)) else ""
+                                        pattern_city.search(text)) else ""
                                 except:
                                     print("Error getting city and country for post")
 
                                 row = [(False, time_posted,
-                                    score,
-                                    permalink, "",
-                                    text, key_phrase, city_post,
-                                    country_post,
-                                    "", query)]
+                                        score,
+                                        permalink, "",
+                                        text, key_phrase, city_post,
+                                        country_post,
+                                        "", query)]
 
                                 print(f"inner row {row}")
 

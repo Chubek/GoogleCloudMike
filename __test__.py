@@ -13,4 +13,4 @@ urls = []
 for item in the_result.get("items"):
     urls.append(item.get("link").replace("www", "old"))
 
-print(len(urls))
+print(the_result)
