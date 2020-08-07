@@ -27,7 +27,7 @@ nltk.download('punkt')
 
 
 def get_google_reddit_tap_water(index_num):
-    
+
     print(f"Starting at {index_num}")
 
     scopes = [
@@ -50,7 +50,7 @@ def get_google_reddit_tap_water(index_num):
     cities = cities_sheet.get_all_values()
     countries = countries_sheet.get_all_values()
     client = bigquery.Client.from_service_account_json('client_secrets.json')
-    table = client.get_table("cydtw-site.reddit_tap_water.reddit_google_threads")
+    table = client.get_table("cydtw-site.reddit_tap_water.reddit_google_nodups")
     SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
     API_KEY = "AIzaSyDefw2spt4b-c8qkIqOy5O7q0otou2W9fA"
     GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
