@@ -20,12 +20,16 @@ import os
 import textwrap
 import itertools
 import requests
+import sys
 
 nltk.download('stopwords')
 nltk.download('punkt')
 
 
-def get_google_reddit_tap_water():
+def get_google_reddit_tap_water(index_num):
+    
+    print(f"Starting at {index_num}")
+
     scopes = [
         'https://www.googleapis.com/auth/spreadsheets',
         'https://www.googleapis.com/auth/drive'
@@ -48,7 +52,7 @@ def get_google_reddit_tap_water():
     client = bigquery.Client.from_service_account_json('client_secrets.json')
     table = client.get_table("cydtw-site.reddit_tap_water.reddit_google_threads")
     SEARCH_ENGINE_ID = "006168594918175601863:t8oecxasips"
-    API_KEY = "AIzaSyA7BzGkhk5iJdWpkfFDJQcywUsFv0s1SqE"
+    API_KEY = "AIzaSyDefw2spt4b-c8qkIqOy5O7q0otou2W9fA"
     GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
     CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
@@ -75,7 +79,8 @@ def get_google_reddit_tap_water():
 
     query_num = 13
     row_num = 0
-    for city_ in cities[13:]:
+    found_ids = []
+    for city_ in cities[index_num:]:
         city = city_[0]
         city_country = city_[1]
         country = city_country
@@ -99,9 +104,15 @@ def get_google_reddit_tap_water():
         try:
             for item in the_result.get("items"):
                 url = item.get("link").replace("www", "old")
+
                 if url.split("/")[-4] == "comments":
+                    id_found = url.split("/")[-3]
+                    if id_found in found_ids:
+                        print("ID already exists")
+                        continue
                     urls.append(url)
-                    print(f"url {url} added")
+                    found_ids.append(id_found)
+                    print(f"url {url} with id {id_found} added")
         except:
             print("No items.")
             continue
@@ -268,5 +279,6 @@ def get_google_reddit_tap_water():
     driver.close()
     driver.quit()
 
+
 if __name__ == "__main__":
-    get_google_reddit_tap_water()
+    get_google_reddit_tap_water(sys.argv[1])
