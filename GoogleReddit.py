@@ -281,4 +281,4 @@ def get_google_reddit_tap_water(index_num):
 
 
 if __name__ == "__main__":
-    get_google_reddit_tap_water(sys.argv[1])
+    get_google_reddit_tap_water(int(sys.argv[1]))
