@@ -27,7 +27,7 @@ client = bigquery.Client.from_service_account_json('client_secrets.json')
 table = client.get_table("cydtw-site.cities.cities_list")
 
 for city in cities[1:]:
-
+    city = city[0]
     print(f"{city}")
 
     query = f"UPDATE `cydtw-site.cities.tap_water_with_cities`\
