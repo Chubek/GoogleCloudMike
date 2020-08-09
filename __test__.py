@@ -30,8 +30,8 @@ for city in cities[1:]:
 
     print(f"{city}")
 
-    query = f"UPDATE `cydtw-site.cities.ttap_water_with_cities`\
-        SET a.post_cities = CONCAT(post_cities, ', {city}')\
+    query = f"UPDATE `cydtw-site.cities.tap_water_with_cities`\
+        SET post_cities = CONCAT(post_cities, ', {city}')\
         WHERE REGEXP_CONTAINS(post_content, FORMAT('\b%s\b', {city}))\
         OR REGEXP_CONTAINS(post_title, FORMAT('\b%s\b', {city}))"
     query_job = client.query(query)
