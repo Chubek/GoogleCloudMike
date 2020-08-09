@@ -1,6 +1,7 @@
 from google.oauth2.service_account import Credentials
 from google.cloud import bigquery
 import gspread
+import pprint
 
 scopes = [
         'https://www.googleapis.com/auth/spreadsheets',
@@ -26,13 +27,14 @@ client = bigquery.Client.from_service_account_json('client_secrets.json')
 
 table = client.get_table("cydtw-site.cities.cities_list")
 
-for city in cities[2:]:
+format_str = lambda cty: cty
+
+for city in cities[3:]:
     city = city[0]
     print(f"{city}")
-
     query = f"UPDATE `cydtw-site.cities.tap_water_with_cities`\
-        SET post_cities = CONCAT(post_cities, '{city}')\
-        WHERE REGEXP_CONTAINS(post_content, FORMAT('\b%s\b', '{city}'))\
-        OR REGEXP_CONTAINS(post_title, FORMAT('\b%s\b', '{city}'))"
+        SET post_cities = CONCAT(post_cities, FORMAT(', %s', '{city}'))\
+        WHERE REGEXP_CONTAINS(post_content, '{format_str(city)}')\
+        OR REGEXP_CONTAINS(post_title, '{format_str(city)}')"
     query_job = client.query(query)
     print("Done")
