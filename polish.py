@@ -75,7 +75,7 @@ for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title
                 appended = True
                 df_fin.loc[fin_i, "Cities"] = city + "," + df_fin.loc[fin_i, "Cities"]
                 inserted = True
-                print(f"Got city {f} in content")
+                print(f"Got city {city} in content")
         if bool(pattern_country.search(str(content))):
             if not country_exists:
                 if not appended:
