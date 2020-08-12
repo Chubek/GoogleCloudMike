@@ -122,7 +122,7 @@ for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title
         except:
             title_ = ""
 
-        client.insert_rows(table, [df_fin.loc[fin_i, "Permalink"], title_, city_to_insert, country_to_insert])
+        client.insert_rows(table, [(df_fin.loc[fin_i, "Permalink"], title_, city_to_insert, country_to_insert)])
         fin_i += 1
 
     print(f"fin_i: {fin_i}")
