@@ -33,102 +33,55 @@ df = pd.read_csv("results-20200812-202830.csv")
 titles = df["Title"].values
 links = df["Link"].values
 
-df_fin = pd.DataFrame(columns=["Permalink", "Title", "Cities", "Countries"])
-
-fin_i = 0
-
 client = bigquery.Client.from_service_account_json('client_secrets.json')
 
 table = client.get_table("cydtw-site.reddit_tap_water.polished_table")
 
 done_links = []
 
-for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title"].values):
-    print(i)
+for city, country in cities[1:]:
 
-    if df.loc[i, "Link"] in done_links:
-        print("Already parsed...")
-        continue
+    pattern_city = re.compile(rf"\b{city}\b|\b{city.lower()}\b")
+    pattern_country = re.compile(rf"\b{country}\b|\b{country.lower()}\b")
 
-    done_links.append(df.loc[i, "Link"])
+    for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title"].values):
+        print(i)
 
-    inserted = False
-    appended = False
+        if df.loc[i, "Link"] in done_links:
+            print("Already parsed...")
+            continue
 
-    for city, country in cities[1:]:
+        done_links.append(df.loc[i, "Link"])
 
-        pattern_city = re.compile(rf"\b{city}\b|\b{city.lower()}\b")
-        pattern_country = re.compile(rf"\b{country}\b|\b{country.lower()}\b")
+        link = df.loc[i, "Link"]
 
-        try:
-            city_exists = True if city not in df_fin.loc[fin_i, "Cities"] else False
-            country_exists = True if country not in df_fin.loc[fin_i, "Countries"] else False
-        except:
-            city_exists = False
-            country_exists = False
+        job = client.query(
+            f"SELECT Cities, Countries FROM `cydtw-site.cities.tap_water_with_cities` WHERE Link = {link}  LIMIT 1")
+
+        if len(job) == 0:
+            print("Query returned zero. Creating...")
+            client.insert_rows(table, [(link, title, "", "")])
+
+        city_str = job[0] if len(job) > 0 else ""
+        country_str = job[1] if len(job) > 0 else ""
+
+        print(f"Query returned {city_str} and {country_str}")
 
         if bool(pattern_city.search(str(content))):
-            if not city_exists:
-                df_fin = df_fin.append({'Permalink': links[i], 'Title': titles[i], 'Cities': '', 'Countries': ''},
-                                       ignore_index=True)
-                print("Appended")
-                appended = True
-                df_fin.loc[fin_i, "Cities"] = city + "," + df_fin.loc[fin_i, "Cities"]
-                inserted = True
-                print(f"Got city {city} in content")
-        if bool(pattern_country.search(str(content))):
-            if not country_exists:
-                if not appended:
-                    df_fin = df_fin.append({'Permalink': links[i], 'Title': titles[i], 'Cities': '', 'Countries': ''},
-                                           ignore_index=True)
-                    print("Appended")
-                    appended = True
-                df_fin.loc[fin_i, "Countries"] = country + "," + df_fin.loc[fin_i, "Countries"]
-                inserted = True
-            print(f"Got country {country} in content")
+            if city not in city_str.split(", "):
+                city_str += city + ", "
+
         if bool(pattern_city.search(str(title))):
-            if not city_exists:
-                if not appended:
-                    df_fin = df_fin.append({'Permalink': links[i], 'Title': titles[i], 'Cities': '', 'Countries': ''},
-                                           ignore_index=True)
-                    print("Appended")
-                    appended = True
-                    df_fin.loc[fin_i, "Cities"] = city + "," + df_fin.loc[fin_i, "Cities"]
-                    inserted = True
-                    print(f"Got city {city} in title")
+            if city not in city_str.split(", "):
+                city_str += city + ", "
+
+        if bool(pattern_country.search(str(content))):
+            if country not in country_str.split(", "):
+                country_str += country + ", "
+
         if bool(pattern_country.search(str(title))):
-            if not country_exists:
-                if not appended:
-                    df_fin = df_fin.append({'Permalink': links[i], 'Title': titles[i], 'Cities': '', 'Countries': ''},
-                                           ignore_index=True)
-                    print("Appended")
-                    appended = True
-                df_fin.loc[fin_i, "Countries"] = country + "," + df_fin.loc[fin_i, "Countries"]
-                inserted = True
-                print(f"Got country {country} in title")
+            if country not in country_str.split(", "):
+                country_str += country_str + ", "
 
-    if inserted and appended:
-
-        try:
-            city_to_insert = df_fin.loc[fin_i, "Cities"]
-        except:
-            city_to_insert = ""
-        try:
-            country_to_insert = df_fin.loc[fin_i, "Countries"]
-        except:
-            country_to_insert = ""
-        try:
-            title_ = df_fin.loc[fin_i, "Title"]
-        except:
-            title_ = ""
-
-        client.insert_rows(table, [(df_fin.loc[fin_i, "Permalink"], title_, city_to_insert, country_to_insert)])
-        fin_i += 1
-
-    print(f"fin_i: {fin_i}")
-
-    df_fin.to_csv("df_fin.csv")
-
-worksheet_fin = sh_fin.get_worksheet(1)
-set_with_dataframe(worksheet_fin, df_fin)
-format_with_dataframe(worksheet_fin, df_fin, include_column_header=True)
+        client.query(f"UPDATE `cydtw-site.reddit_tap_water.polished_table` SET Cities = {city_str[:-2]},"
+                     f" Countries = {country_str[:-2]} WHERE LINK ={link}")
