@@ -39,11 +39,9 @@ fin_i = 0
 
 client = bigquery.Client.from_service_account_json('client_secrets.json')
 
-
 table = client.get_table("cydtw-site.reddit_tap_water.polished_table")
 
 done_links = []
-
 
 for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title"].values):
     print(i)
@@ -58,7 +56,6 @@ for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title
     appended = False
 
     for city, country in cities[1:]:
-        print(f"Looking for city {city} and country {country}")
 
         pattern_city = re.compile(rf"\b{city}\b|\b{city.lower()}\b")
         pattern_country = re.compile(rf"\b{country}\b|\b{country.lower()}\b")
@@ -78,7 +75,7 @@ for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title
                 appended = True
                 df_fin.loc[fin_i, "Cities"] = city + "," + df_fin.loc[fin_i, "Cities"]
                 inserted = True
-                print("Got city in content")
+                print(f"Got city {f} in content")
         if bool(pattern_country.search(str(content))):
             if not country_exists:
                 if not appended:
@@ -88,7 +85,7 @@ for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title
                     appended = True
                 df_fin.loc[fin_i, "Countries"] = country + "," + df_fin.loc[fin_i, "Countries"]
                 inserted = True
-            print("Got country in content")
+            print(f"Got country {country} in content")
         if bool(pattern_city.search(str(title))):
             if not city_exists:
                 if not appended:
@@ -98,7 +95,7 @@ for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title
                     appended = True
                     df_fin.loc[fin_i, "Cities"] = city + "," + df_fin.loc[fin_i, "Cities"]
                     inserted = True
-                    print("Got city in title")
+                    print(f"Got city {city} in title")
         if bool(pattern_country.search(str(title))):
             if not country_exists:
                 if not appended:
@@ -108,21 +105,24 @@ for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title
                     appended = True
                 df_fin.loc[fin_i, "Countries"] = country + "," + df_fin.loc[fin_i, "Countries"]
                 inserted = True
-                print("Got country in title")
+                print(f"Got country {country} in title")
 
     if inserted and appended:
 
         try:
-            city_to_insert = df_fin[fin_i, "Cities"]
+            city_to_insert = df_fin.loc[fin_i, "Cities"]
         except:
             city_to_insert = ""
         try:
-            country_to_insert = df_fin[fin_i, "Countries"]
+            country_to_insert = df_fin.loc[fin_i, "Countries"]
         except:
             country_to_insert = ""
+        try:
+            title_ = df_fin.loc[fin_i, "Title"]
+        except:
+            title_ = ""
 
-        client.insert_rows(table, [df_fin.loc[fin_i, "Permalink"], df_fin.loc[fin_i, "Title"],
-                                   city_to_insert, country_to_insert])
+        client.insert_rows(table, [df_fin.loc[fin_i, "Permalink"], title_, city_to_insert, country_to_insert])
         fin_i += 1
 
     print(f"fin_i: {fin_i}")
