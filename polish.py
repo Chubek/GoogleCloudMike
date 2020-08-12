@@ -42,9 +42,17 @@ client = bigquery.Client.from_service_account_json('client_secrets.json')
 
 table = client.get_table("cydtw-site.reddit_tap_water.polished_table")
 
+done_links = []
+
 
 for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title"].values):
     print(i)
+
+    if df.loc[i, "Link"] in done_links:
+        print("Already parsed...")
+        continue
+
+    done_links.append(df.loc[i, "Link"])
 
     inserted = False
     appended = False
@@ -103,8 +111,18 @@ for i, content, title in zip(range(df.shape[0]), df["Content"].values, df["Title
                 print("Got country in title")
 
     if inserted and appended:
+
+        try:
+            city_to_insert = df_fin[fin_i, "Cities"]
+        except:
+            city_to_insert = ""
+        try:
+            country_to_insert = df_fin[fin_i, "Countries"]
+        except:
+            country_to_insert = ""
+
         client.insert_rows(table, [df_fin.loc[fin_i, "Permalink"], df_fin.loc[fin_i, "Title"],
-                                   df_fin.loc[fin_i, "Cities"], df_fin[fin_i, "Countries"]])
+                                   city_to_insert, country_to_insert])
         fin_i += 1
 
     print(f"fin_i: {fin_i}")
