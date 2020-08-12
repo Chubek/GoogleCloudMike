@@ -56,14 +56,23 @@ for city, country in cities[1:]:
         link = df.loc[i, "Link"]
 
         job = client.query(
-            f"SELECT Cities, Countries FROM `cydtw-site.cities.tap_water_with_cities` WHERE Link = {link}  LIMIT 1")
+            f"SELECT Cities, Countries FROM `cydtw-site.reddit_tap_water.polished_table` WHERE Link = '{link}'  LIMIT 1")
 
-        if len(job) == 0:
+        job.result()
+
+        row_num = 0
+
+        city_str = ""
+        country_str = ""
+
+        for row in job:
+            row_num += 1
+            city_str = row[0]
+            country_str = row[1]
+
+        if row_num == 0:
             print("Query returned zero. Creating...")
             client.insert_rows(table, [(link, title, "", "")])
-
-        city_str = job[0] if len(job) > 0 else ""
-        country_str = job[1] if len(job) > 0 else ""
 
         print(f"Query returned {city_str} and {country_str}")
 
@@ -84,4 +93,4 @@ for city, country in cities[1:]:
                 country_str += country_str + ", "
 
         client.query(f"UPDATE `cydtw-site.reddit_tap_water.polished_table` SET Cities = {city_str[:-2]},"
-                     f" Countries = {country_str[:-2]} WHERE LINK ={link}")
+                     f" Countries = {country_str[:-2]} WHERE LINK = '{link}'")
