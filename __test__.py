@@ -37,4 +37,4 @@ for city in cities[3:]:
         WHERE REGEXP_CONTAINS(post_content, '{format_str(city)}')\
         OR REGEXP_CONTAINS(post_title, '{format_str(city)}')"
     query_job = client.query(query)
-    print("Done")
+ba    print("Done")
