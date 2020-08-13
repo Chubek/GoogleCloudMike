@@ -72,7 +72,7 @@ for city, country in cities[1:]:
 
         if row_num == 0:
             print("Query returned zero. Creating...")
-            client.insert_rows(table, [(link, title, "", "")])
+            client.insert_rows(table, [(str(link), str(title), "", "")])
 
         print(f"Query returned {city_str} and {country_str}")
 
