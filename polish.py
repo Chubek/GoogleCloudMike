@@ -90,7 +90,7 @@ for city, country in cities[1:]:
 
         if bool(pattern_country.search(str(title))):
             if country not in country_str.split(", "):
-                country_str += country_str + ", "
+                country_str += country + ", "
 
         client.query(f"UPDATE `cydtw-site.reddit_tap_water.polished_table` SET Cities = {city_str[:-2]},"
                      f" Countries = {country_str[:-2]} WHERE LINK = '{link}'")
