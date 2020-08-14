@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from google.cloud import bigquery
+import sys
 
 GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
 CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
@@ -35,16 +36,21 @@ for r_url in r_urls_second:
     urls.append(r_url.get_attribute("href"))
 
 
+print(f"Got {len(urls)} urls")
+
 client = bigquery.Client.from_service_account_json('client_secrets.json')
 table = client.get_table("cydtw-site.analytics_data_pre.wtg_tap_water")
 
-for url in urls:
+for i, url in enumerate(urls[sys.argv[1]:]):
+    print(f"{i}: {url}")
     try:
         driver.get(url)
 
         try:
             post = driver.find_element_by_xpath("//h2[text() = 'Food and Drink']/following::p")
             client.insert_rows(table, [(url, post.text)])
+            print("Got!")
+            del post
         except:
             continue
     except:
