@@ -41,7 +41,7 @@ print(f"Got {len(urls)} urls")
 client = bigquery.Client.from_service_account_json('client_secrets.json')
 table = client.get_table("cydtw-site.analytics_data_pre.wtg_tap_water")
 
-for i, url in enumerate(urls[sys.argv[1]:]):
+for i, url in enumerate(urls[int(sys.argv[1]):]):
     print(f"{i}: {url}")
     try:
         driver.get(url)
