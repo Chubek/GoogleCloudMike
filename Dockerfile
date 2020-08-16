@@ -11,7 +11,10 @@ RUN apt-get clean \
 && apt-get update \
 && apt-get install sudo -y \
 && sudo apt-get install wget -y \
-&& sudo apt-get install -y gnupg2
+&& sudo apt-get install -y gnupg2 \
+&& sudo apt-get install libpq-dev python-dev libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev libffi-dev \
+&& sudo apt-get install python3-dev
+
 
 
 RUN echo "Set disable_coredump false" >> /etc/sudo.conf
