@@ -51,7 +51,7 @@ options.add_argument("--disable-extensions")
 options.add_argument("--disable-gpu")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument('--remote-debugging-port=9222')
-driver = webdriver.Chrome(executable_path="./chromedriver", options=options)
+driver = webdriver.Chrome(options=options)
 
 wrap_num = lambda num: 0 if num == 90 else num
 
