@@ -6,6 +6,7 @@ from google.cloud import bigquery
 from googleapiclient.discovery import build
 from lxml.html.soupparser import fromstring
 import re
+import time
 
 index_start_file = open("index_start.txt", "r+")
 done_urls_file = open("done_urls.txt", "r+")
@@ -67,6 +68,7 @@ for city, country in cities[int(index_start[-1][0]):]:
         the_result = service.cse().list(q=query,
                                         start=i,
                                         cx=SEARCH_ENGINE_ID).execute()
+        time.sleep(20)
 
         pattern = re.compile(rf"(tap.water).(.*{city})|(.quality|.safety)")
 
@@ -76,6 +78,7 @@ for city, country in cities[int(index_start[-1][0]):]:
                     urls.append(item.get('link'))
         except:
             continue
+
 
     print(f"Got {len(urls)} urls")
 
