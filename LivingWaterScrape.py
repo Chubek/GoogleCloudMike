@@ -37,7 +37,7 @@ countries = countries_sheet.get_all_values()
 client = bigquery.Client.from_service_account_json('client_secrets.json')
 table = client.get_table("cydtw-site.living_water.tap_water_living_water")
 SEARCH_ENGINE_ID = "8038b946b9a62a518"
-API_KEY = "AIzaSyA7BzGkhk5iJdWpkfFDJQcywUsFv0s1SqE"
+API_KEY = "AIzaSyC0Mh-ZCUXyK8z0kdMor8viJRmMLSYo67I"
 
 service = build("customsearch", "v1", developerKey=API_KEY)
 
