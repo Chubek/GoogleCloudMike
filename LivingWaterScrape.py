@@ -170,6 +170,6 @@ class MyHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    port = os.environ["PORT"] or 8080
+    port = int(os.environ["PORT"]) or 8080
     myServer = HTTPServer(('', port), MyHandler)
     myServer.serve_forever()
