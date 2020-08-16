@@ -26,7 +26,7 @@ RUN apt-get install -y google-chrome-stable
 
 
 RUN apt-get install -yqq unzip
-RUN wget -O /tmp/chromedriver.zip chromedriver.storage.googleapis.com/85.0.4183.38/chromedriver_linux64.zip
+RUN wget -O /tmp/chromedriver.zip chromedriver.storage.googleapis.com/84.0.4147.30/chromedriver_linux64.zip
 RUN sudo unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
 RUN sudo apt-get install python3-lxml -y
