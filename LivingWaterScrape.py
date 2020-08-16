@@ -9,9 +9,10 @@ import re
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import os
+import threading
 
 
-def scrape_living_water():
+def scrape_living_water(max):
     index_start_file = open("index_start.txt", "r+")
     done_urls_file = open("done_urls.txt", "r+")
 
@@ -62,7 +63,7 @@ def scrape_living_water():
 
     city_marker = int(index_start[-1][0])
 
-    for city, country in cities[int(index_start[-1][0]):]:
+    for city, country in cities[int(index_start[-1][0]):max]:
         urls = []
         city_marker += 1
         for i in range(int(index_start[-1][1]), 100, 10):
@@ -166,10 +167,21 @@ def scrape_living_water():
 class MyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
-        scrape_living_water()
+
+
+def server():
+    port = int(os.environ["PORT"]) or 8080
+    my_server = HTTPServer(('', port), MyHandler)
+    my_server.serve_forever()
 
 
 if __name__ == "__main__":
-    port = int(os.environ["PORT"]) or 8080
-    myServer = HTTPServer(('', port), MyHandler)
-    myServer.serve_forever()
+    threads = []
+    server_thread = threading.Thread(target=server)
+    threads.append(server_thread)
+    for i in range(2500, 10000, 2500):
+        t = threading.Thread(target=scrape_living_water, args=(i,))
+        threads.append(t)
+
+    for t in threads:
+        t.start()
