@@ -52,6 +52,11 @@ RUN true
 COPY done_urls.txt /
 ADD done_urls.txt /
 
+RUN true
+
+COPY client_secrets.json /
+ADD client_secrets.json /
+
 
 RUN sudo apt install python3-pip -y
 
