@@ -15,3 +15,4 @@ rake-nltk~=1.0.4
 praw~=7.1.0
 google_search~=1.0.2
 selenium~=3.141.0
+lxml~=3.4.2
