@@ -12,8 +12,8 @@ RUN apt-get clean \
 && apt-get install sudo -y \
 && sudo apt-get install wget -y \
 && sudo apt-get install -y gnupg2 \
-&& sudo apt-get install libpq-dev python-dev libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev libffi-dev \
-&& sudo apt-get install python3-dev
+&& sudo apt-get install libpq-dev python-dev libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev libffi-dev -y \
+&& sudo apt-get install python3-dev -y
 
 
 
