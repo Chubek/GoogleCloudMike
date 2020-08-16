@@ -65,10 +65,13 @@ for city, country in cities[int(index_start[-1][0]):]:
         index_start_file.write(f"\n{city_marker};{wrap_num(i)}")
         print(f"Checking {city_marker};{i}")
         query = f"(tap AND water) AND ({city} OR {country})"
-        the_result = service.cse().list(q=query,
-                                        start=i,
-                                        cx=SEARCH_ENGINE_ID).execute()
-        time.sleep(20)
+        the_result = service.cse().siterestrict().list(q=query,
+                                                       start=i,
+                                                       cx=SEARCH_ENGINE_ID).execute()
+
+        print("Waiting...")
+        time.sleep(65)
+        print("Wait done...")
 
         pattern = re.compile(rf"(tap.water).(.*{city})|(.quality|.safety)")
 
@@ -78,7 +81,6 @@ for city, country in cities[int(index_start[-1][0]):]:
                     urls.append(item.get('link'))
         except:
             continue
-
 
     print(f"Got {len(urls)} urls")
 
@@ -113,7 +115,11 @@ for city, country in cities[int(index_start[-1][0]):]:
                 tag_contains_post += f"{el.text}\n\n\n"
 
             if tag_contains_p:
-                client.insert_rows(table, [(url, tag_contains_pre, tag_contains_p, tag_contains_post, "p", query)])
+                error = client.insert_rows(table, [(url, tag_contains_pre, tag_contains_p,
+                                                    tag_contains_post,
+                                                    "p", f"(tap AND water) AND ({city} OR {country})")])
+                if not error:
+                    print("Inserted")
 
         except:
             print("No p")
@@ -134,7 +140,11 @@ for city, country in cities[int(index_start[-1][0]):]:
                 tag_contains_post += f"{el.text}\n\n\n"
 
             if tag_contains_li:
-                client.insert_rows(table, [(url, tag_contains_pre, tag_contains_li, tag_contains_post, "li", query)])
+                error = client.insert_rows(table, [(url, tag_contains_pre, tag_contains_li,
+                                                    tag_contains_post,
+                                                    "li", f"(tap AND water) AND ({city} OR {country})")])
+                if not error:
+                    print("inserted")
         except:
             print("No li")
 
