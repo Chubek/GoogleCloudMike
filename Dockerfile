@@ -10,7 +10,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get clean \
 && apt-get update \
 && apt-get install sudo -y \
-&& sudo apt-get install wget -y
+&& sudo apt-get install wget -y \
+&& sudo apt-get install -y gnupg2
 
 
 RUN echo "Set disable_coredump false" >> /etc/sudo.conf
