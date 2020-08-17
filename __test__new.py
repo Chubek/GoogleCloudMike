@@ -1,6 +1,7 @@
-o = open("test.txt", "r+")
+import pandas as pd
 
-last_index = int(o.readlines()[-1])
+hello = [{"gimme": "a man after midnight"}, {"gimme": "a jew after midnight"}]
 
-for i in range(last_index, last_index + 50):
-    o.write(f"\n{i}")
+df = pd.DataFrame.from_records(hello)
+
+print(df.head())

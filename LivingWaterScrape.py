@@ -12,8 +12,8 @@ import os
 import threading
 
 
-def scrape_living_water(max):
-    index_start_file = open("index_start.txt", "r+")
+def scrape_living_water(max_num):
+    index_start_file = open(f"index_start_{max_num}.txt", "r+")
     done_urls_file = open("done_urls.txt", "r+")
 
     index_start = [line.strip().split(";") for line in index_start_file.readlines()]
@@ -63,7 +63,7 @@ def scrape_living_water(max):
 
     city_marker = int(index_start[-1][0])
 
-    for city, country in cities[int(index_start[-1][0]):max]:
+    for city, country in cities[int(index_start[-1][0]):max_num]:
         urls = []
         city_marker += 1
         for i in range(int(index_start[-1][1]), 100, 10):
@@ -180,6 +180,8 @@ if __name__ == "__main__":
     server_thread = threading.Thread(target=server)
     threads.append(server_thread)
     for i in range(2500, 10000, 2500):
+        index_start_file = open(f"index_start_{i}.txt", "r+")
+        index_start_file.write(f"{(i + 1) - 2500};0")
         t = threading.Thread(target=scrape_living_water, args=(i,))
         threads.append(t)
 
