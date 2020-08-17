@@ -172,3 +172,4 @@ def living_water_threaded():
 
     for t in threads:
         t.start()
+        time.sleep(120)

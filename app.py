@@ -11,6 +11,7 @@ app = Flask(__name__)
 def hello_world():
     print("Server triggered")
     LivingWaterScrape.living_water_threaded()
+    return "Function started!"
 
 
 if __name__ == "__main__":
