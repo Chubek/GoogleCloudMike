@@ -1,6 +1,24 @@
 # To enable ssh & remote debugging on app service change the base image to the one below
 # FROM mcr.microsoft.com/azure-functions/python:3.0-python3.8-appservice
 FROM python:3.7-slim
+RUN mkdir app
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY requirements.txt ./
+ADD requirements.txt ./
+RUN true
+COPY LivingWaterScrape.py ./
+ADD LivingWaterScrape.py ./
+RUN true
+COPY app.py ./
+ADD app.py ./
+RUN true
+COPY done_urls.txt ./
+ADD done_urls.txt ./
+RUN true
+COPY client_secrets.json ./
+ADD client_secrets.json ./
+
 
 ENV TZ=Europe/Minsk
 
@@ -31,29 +49,6 @@ RUN sudo apt-get install python3-lxml -y
 
 ENV DISPLAY=:99
 
-COPY requirements.txt /
-ADD requirements.txt /
-
-RUN true
-
-COPY LivingWaterScrape.py /
-ADD LivingWaterScrape.py /
-
-
-RUN true
-
-COPY app.py /
-ADD app.py /
-
-RUN true
-
-COPY done_urls.txt /
-ADD done_urls.txt /
-
-RUN true
-
-COPY client_secrets.json /
-ADD client_secrets.json /
 
 
 RUN sudo apt install python3-pip -y
@@ -61,5 +56,6 @@ RUN sudo apt install python3-pip -y
 RUN pip3 install -r /requirements.txt
 RUN pip3 install gunicorn Flask
 
-CMD ["gunicorn"  , "--bind --workers 1 --threads 8 --timeout 0", "0.0.0.0:8080", "app:app"]
+CMD ["gunicorn",  "--bind", ":8080", "--workers", "1", "--threads", "8", "--timeout", "0", "app:app"]
 EXPOSE 8080
+
