@@ -8,6 +8,7 @@ from lxml.html.soupparser import fromstring
 import re
 import time
 import threading
+from google.cloud import logging
 
 
 def scrape_living_water(max_num):
@@ -21,13 +22,20 @@ def scrape_living_water(max_num):
 
     scopes = [
         'https://www.googleapis.com/auth/spreadsheets',
-        'https://www.googleapis.com/auth/drive'
+        'https://www.googleapis.com/auth/drive',
+        'https://www.googleapis.com/auth/cloud-platform',
+        'https://www.googleapis.com/auth/logging.admin',
+        'https://www.googleapis.com/auth/logging.read',
+        'https://www.googleapis.com/auth/logging.write'
     ]
 
     credentials = Credentials.from_service_account_file(
         'client_secrets.json',
         scopes=scopes
     )
+    logging_client = logging.Client(credentials=credentials)
+    log_name = 'my-log'
+    logger = logging_client.logger(log_name)
 
     gc = gspread.authorize(credentials)
 
@@ -66,15 +74,15 @@ def scrape_living_water(max_num):
         city_marker += 1
         for i in range(int(index_start[-1][1]), 100, 10):
             index_start_file.write(f"\n{city_marker};{wrap_num(i)}")
-            print(f"Checking {city_marker};{i}")
+            logger.log_text(f"Checking {city_marker};{i}")
             query = f"(tap AND water) AND ({city} OR {country})"
             the_result = service.cse().siterestrict().list(q=query,
                                                            start=i,
                                                            cx=SEARCH_ENGINE_ID).execute()
 
-            print("Waiting...")
+            logger.log_text("Waiting...")
             time.sleep(65)
-            print("Wait done...")
+            logger.log_text("Wait done...")
 
             pattern = re.compile(rf"(tap.water).(.*{city})|(.quality|.safety)")
 
@@ -85,10 +93,10 @@ def scrape_living_water(max_num):
             except:
                 continue
 
-        print(f"Got {len(urls)} urls")
+        logger.log_text(f"Got {len(urls)} urls")
 
         for url in urls:
-            print(f"Getting {url}")
+            logger.log_text(f"Getting {url}")
 
             done_urls.append(url)
             done_urls_file.write(f"\n{url}")
@@ -124,10 +132,10 @@ def scrape_living_water(max_num):
                                                         tag_contains_post,
                                                         "p", f"(tap AND water) AND ({city} OR {country})")])
                     if not error:
-                        print("Inserted")
+                        logger.log_text("Inserted")
 
             except:
-                print("No p")
+                logger.log_text("No p")
 
             try:
                 element_main_li = root.xpath(
@@ -151,9 +159,9 @@ def scrape_living_water(max_num):
                                                         tag_contains_post,
                                                         "li", f"(tap AND water) AND ({city} OR {country})")])
                     if not error:
-                        print("inserted")
+                        logger.log_text("inserted")
             except:
-                print("No li")
+                logger.log_text("No li")
 
             del element_fll_li, element_fll_p, element_main_p, element_main_li, \
                 element_pre_p, element_pre_li, tag_contains_p, tag_contains_li, tag_contains_post, tag_contains_pre, root
