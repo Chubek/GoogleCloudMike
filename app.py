@@ -1,20 +1,16 @@
-from flask import Flask, render_template, request, g
-from to_sheet import run_grab
+import os
+
+import LivingWaterScrape
+
+from flask import Flask
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-    return render_template("request_button.html")
+def hello_world():
+    LivingWaterScrape.living_water_threaded()
 
 
-@app.route('/result', methods=['POST'])
-def result():
-    if request.method == 'POST':
-        form_result = request.form
-        alert = run_grab(form_result.get("Name"),
-                         True if form_result.get("Create") == 'on' else False,
-                         form_result.get("ShareEmail"))
-
-        return render_template("result.html", alert=alert)
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))

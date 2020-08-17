@@ -7,8 +7,6 @@ from googleapiclient.discovery import build
 from lxml.html.soupparser import fromstring
 import re
 import time
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import os
 import threading
 
 
@@ -164,21 +162,8 @@ def scrape_living_water(max_num):
     driver.quit()
 
 
-class MyHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-
-
-def server():
-    port = int(os.environ["PORT"]) or 8080
-    my_server = HTTPServer(('', port), MyHandler)
-    my_server.serve_forever()
-
-
-if __name__ == "__main__":
+def living_water_threaded():
     threads = []
-    server_thread = threading.Thread(target=server)
-    threads.append(server_thread)
     for i in range(2500, 10000, 2500):
         index_start_file = open(f"index_start_{i}.txt", "w")
         index_start_file.write(f"{(i + 1) - 2500};0")

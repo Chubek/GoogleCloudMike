@@ -44,8 +44,8 @@ ADD LivingWaterScrape.py /
 
 RUN true
 
-COPY index_start.txt /
-ADD index_start.txt /
+COPY app.py /
+ADD app.py /
 
 RUN true
 
@@ -62,4 +62,4 @@ RUN sudo apt install python3-pip -y
 
 RUN pip3 install -r /requirements.txt
 
-CMD [ "python3", "./LivingWaterScrape.py" ]
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
