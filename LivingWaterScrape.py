@@ -180,7 +180,7 @@ if __name__ == "__main__":
     server_thread = threading.Thread(target=server)
     threads.append(server_thread)
     for i in range(2500, 10000, 2500):
-        index_start_file = open(f"index_start_{i}.txt", "r+")
+        index_start_file = open(f"index_start_{i}.txt", "w")
         index_start_file.write(f"{(i + 1) - 2500};0")
         t = threading.Thread(target=scrape_living_water, args=(i,))
         threads.append(t)
