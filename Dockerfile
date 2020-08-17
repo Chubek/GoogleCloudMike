@@ -1,7 +1,6 @@
 # To enable ssh & remote debugging on app service change the base image to the one below
 # FROM mcr.microsoft.com/azure-functions/python:3.0-python3.8-appservice
-FROM python:latest
-FROM ubuntu:latest
+FROM python:3.7-slim
 
 ENV TZ=Europe/Minsk
 
@@ -12,7 +11,6 @@ RUN apt-get clean \
 && apt-get install sudo -y \
 && sudo apt-get install wget -y \
 && sudo apt-get install -y gnupg2 \
-&& sudo apt-get install libpq-dev python-dev libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev libffi-dev -y \
 && sudo apt-get install python3-dev -y
 
 
@@ -61,5 +59,7 @@ ADD client_secrets.json /
 RUN sudo apt install python3-pip -y
 
 RUN pip3 install -r /requirements.txt
+RUN pip3 install gunicorn Flask
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
+CMD ["gunicorn"  , "--bind --workers 1 --threads 8 --timeout 0", "0.0.0.0:8080", "app:app"]
+EXPOSE 8080
