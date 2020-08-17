@@ -53,7 +53,7 @@ ENV DISPLAY=:99
 
 RUN sudo apt install python3-pip -y
 
-RUN pip3 install -r /requirements.txt
+RUN pip3 install -r ./requirements.txt
 RUN pip3 install gunicorn Flask
 
 CMD ["gunicorn",  "--bind", ":8080", "--workers", "1", "--threads", "8", "--timeout", "0", "app:app"]
