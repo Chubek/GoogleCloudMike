@@ -4,17 +4,17 @@ FROM python:3.7-slim
 RUN mkdir app
 ENV APP_HOME /app
 WORKDIR $APP_HOME
-COPY requirements.txt ./
-ADD requirements.txt ./
+COPY app_engine/requirements.txt ./
+ADD app_engine/requirements.txt ./
 RUN true
-COPY LivingWaterScrape.py ./
-ADD LivingWaterScrape.py ./
+COPY app_engine/main.py ./
+ADD app_engine/main.py ./
 RUN true
-COPY app.py ./
-ADD app.py ./
+COPY app_engine/app.py ./
+ADD app_engine/app.py ./
 RUN true
-COPY done_urls.txt ./
-ADD done_urls.txt ./
+COPY app_engine/done_urls.txt ./
+ADD app_engine/done_urls.txt ./
 RUN true
 COPY client_secrets.json ./
 ADD client_secrets.json ./
